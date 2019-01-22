@@ -1,0 +1,2 @@
+1.跟进自己本地环境修改配置文件 mybatisConfig.xml
+2.运行PaginationPluginMybatis中的main方法即可
