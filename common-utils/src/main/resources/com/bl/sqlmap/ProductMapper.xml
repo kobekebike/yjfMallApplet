@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bl.dao.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.bl.model.Product" >
+    <id column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="product_describe" property="productDescribe" jdbcType="VARCHAR" />
+    <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    <result column="create_id" property="createId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="product_status" property="productStatus" jdbcType="INTEGER" />
+    <result column="product_type" property="productType" jdbcType="VARCHAR" />
+    <result column="product_type_id" property="productTypeId" jdbcType="INTEGER" />
+    <result column="product_discount" property="productDiscount" jdbcType="INTEGER" />
+    <result column="product_title" property="productTitle" jdbcType="VARCHAR" />
+    <result column="product_file_path" property="productFilePath" jdbcType="VARCHAR" />
+    <result column="product_sort" property="productSort" jdbcType="INTEGER" />
+    <result column="product_code" property="productCode" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bl.model.Product" extends="BaseResultMap" >
+    <result column="product_detail" property="productDetail" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    product_id, product_describe, product_price, create_name, create_id, create_time, 
+    product_status, product_type, product_type_id, product_discount, product_title, product_file_path, 
+    product_sort, product_code, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    product_detail
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.bl.model.ProductCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bl.model.ProductCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+      <if test=" limitEnd > 0" >
+        limit #{limitStart} , #{limitEnd}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product
+    where product_id = #{productId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product
+    where product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bl.model.ProductCriteria" >
+    delete from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bl.model.Product" useGeneratedKeys="true" keyProperty="productId" >
+    insert into product (product_id, product_describe, product_price, 
+      create_name, create_id, create_time, 
+      product_status, product_type, product_type_id, 
+      product_discount, product_title, product_file_path, 
+      product_sort, product_code, update_time, 
+      product_detail)
+    values (#{productId,jdbcType=INTEGER}, #{productDescribe,jdbcType=VARCHAR}, #{productPrice,jdbcType=DECIMAL}, 
+      #{createName,jdbcType=VARCHAR}, #{createId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{productStatus,jdbcType=INTEGER}, #{productType,jdbcType=VARCHAR}, #{productTypeId,jdbcType=INTEGER}, 
+      #{productDiscount,jdbcType=INTEGER}, #{productTitle,jdbcType=VARCHAR}, #{productFilePath,jdbcType=VARCHAR}, 
+      #{productSort,jdbcType=INTEGER}, #{productCode,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{productDetail,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bl.model.Product" useGeneratedKeys="true" keyProperty="productId" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productDescribe != null" >
+        product_describe,
+      </if>
+      <if test="productPrice != null" >
+        product_price,
+      </if>
+      <if test="createName != null" >
+        create_name,
+      </if>
+      <if test="createId != null" >
+        create_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="productStatus != null" >
+        product_status,
+      </if>
+      <if test="productType != null" >
+        product_type,
+      </if>
+      <if test="productTypeId != null" >
+        product_type_id,
+      </if>
+      <if test="productDiscount != null" >
+        product_discount,
+      </if>
+      <if test="productTitle != null" >
+        product_title,
+      </if>
+      <if test="productFilePath != null" >
+        product_file_path,
+      </if>
+      <if test="productSort != null" >
+        product_sort,
+      </if>
+      <if test="productCode != null" >
+        product_code,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="productDetail != null" >
+        product_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productDescribe != null" >
+        #{productDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null" >
+        #{productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productStatus != null" >
+        #{productStatus,jdbcType=INTEGER},
+      </if>
+      <if test="productType != null" >
+        #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="productTypeId != null" >
+        #{productTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="productDiscount != null" >
+        #{productDiscount,jdbcType=INTEGER},
+      </if>
+      <if test="productTitle != null" >
+        #{productTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="productFilePath != null" >
+        #{productFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="productSort != null" >
+        #{productSort,jdbcType=INTEGER},
+      </if>
+      <if test="productCode != null" >
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productDetail != null" >
+        #{productDetail,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bl.model.ProductCriteria" resultType="java.lang.Integer" >
+    select count(*) from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update product
+    <set >
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=INTEGER},
+      </if>
+      <if test="record.productDescribe != null" >
+        product_describe = #{record.productDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPrice != null" >
+        product_price = #{record.productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createName != null" >
+        create_name = #{record.createName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createId != null" >
+        create_id = #{record.createId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.productStatus != null" >
+        product_status = #{record.productStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.productType != null" >
+        product_type = #{record.productType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productTypeId != null" >
+        product_type_id = #{record.productTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.productDiscount != null" >
+        product_discount = #{record.productDiscount,jdbcType=INTEGER},
+      </if>
+      <if test="record.productTitle != null" >
+        product_title = #{record.productTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productFilePath != null" >
+        product_file_path = #{record.productFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productSort != null" >
+        product_sort = #{record.productSort,jdbcType=INTEGER},
+      </if>
+      <if test="record.productCode != null" >
+        product_code = #{record.productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.productDetail != null" >
+        product_detail = #{record.productDetail,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update product
+    set product_id = #{record.productId,jdbcType=INTEGER},
+      product_describe = #{record.productDescribe,jdbcType=VARCHAR},
+      product_price = #{record.productPrice,jdbcType=DECIMAL},
+      create_name = #{record.createName,jdbcType=VARCHAR},
+      create_id = #{record.createId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      product_status = #{record.productStatus,jdbcType=INTEGER},
+      product_type = #{record.productType,jdbcType=VARCHAR},
+      product_type_id = #{record.productTypeId,jdbcType=INTEGER},
+      product_discount = #{record.productDiscount,jdbcType=INTEGER},
+      product_title = #{record.productTitle,jdbcType=VARCHAR},
+      product_file_path = #{record.productFilePath,jdbcType=VARCHAR},
+      product_sort = #{record.productSort,jdbcType=INTEGER},
+      product_code = #{record.productCode,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      product_detail = #{record.productDetail,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update product
+    set product_id = #{record.productId,jdbcType=INTEGER},
+      product_describe = #{record.productDescribe,jdbcType=VARCHAR},
+      product_price = #{record.productPrice,jdbcType=DECIMAL},
+      create_name = #{record.createName,jdbcType=VARCHAR},
+      create_id = #{record.createId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      product_status = #{record.productStatus,jdbcType=INTEGER},
+      product_type = #{record.productType,jdbcType=VARCHAR},
+      product_type_id = #{record.productTypeId,jdbcType=INTEGER},
+      product_discount = #{record.productDiscount,jdbcType=INTEGER},
+      product_title = #{record.productTitle,jdbcType=VARCHAR},
+      product_file_path = #{record.productFilePath,jdbcType=VARCHAR},
+      product_sort = #{record.productSort,jdbcType=INTEGER},
+      product_code = #{record.productCode,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bl.model.Product" >
+    update product
+    <set >
+      <if test="productDescribe != null" >
+        product_describe = #{productDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null" >
+        product_price = #{productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createName != null" >
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        create_id = #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productStatus != null" >
+        product_status = #{productStatus,jdbcType=INTEGER},
+      </if>
+      <if test="productType != null" >
+        product_type = #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="productTypeId != null" >
+        product_type_id = #{productTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="productDiscount != null" >
+        product_discount = #{productDiscount,jdbcType=INTEGER},
+      </if>
+      <if test="productTitle != null" >
+        product_title = #{productTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="productFilePath != null" >
+        product_file_path = #{productFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="productSort != null" >
+        product_sort = #{productSort,jdbcType=INTEGER},
+      </if>
+      <if test="productCode != null" >
+        product_code = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productDetail != null" >
+        product_detail = #{productDetail,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bl.model.Product" >
+    update product
+    set product_describe = #{productDescribe,jdbcType=VARCHAR},
+      product_price = #{productPrice,jdbcType=DECIMAL},
+      create_name = #{createName,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      product_status = #{productStatus,jdbcType=INTEGER},
+      product_type = #{productType,jdbcType=VARCHAR},
+      product_type_id = #{productTypeId,jdbcType=INTEGER},
+      product_discount = #{productDiscount,jdbcType=INTEGER},
+      product_title = #{productTitle,jdbcType=VARCHAR},
+      product_file_path = #{productFilePath,jdbcType=VARCHAR},
+      product_sort = #{productSort,jdbcType=INTEGER},
+      product_code = #{productCode,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      product_detail = #{productDetail,jdbcType=LONGVARBINARY}
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bl.model.Product" >
+    update product
+    set product_describe = #{productDescribe,jdbcType=VARCHAR},
+      product_price = #{productPrice,jdbcType=DECIMAL},
+      create_name = #{createName,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      product_status = #{productStatus,jdbcType=INTEGER},
+      product_type = #{productType,jdbcType=VARCHAR},
+      product_type_id = #{productTypeId,jdbcType=INTEGER},
+      product_discount = #{productDiscount,jdbcType=INTEGER},
+      product_title = #{productTitle,jdbcType=VARCHAR},
+      product_file_path = #{productFilePath,jdbcType=VARCHAR},
+      product_sort = #{productSort,jdbcType=INTEGER},
+      product_code = #{productCode,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+</mapper>

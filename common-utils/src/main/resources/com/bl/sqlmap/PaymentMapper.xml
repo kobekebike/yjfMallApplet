@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bl.dao.PaymentMapper" >
+  <resultMap id="BaseResultMap" type="com.bl.model.Payment" >
+    <id column="payment_id" property="paymentId" jdbcType="INTEGER" />
+    <result column="payment_serial" property="paymentSerial" jdbcType="VARCHAR" />
+    <result column="payment_account" property="paymentAccount" jdbcType="DECIMAL" />
+    <result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
+    <result column="order_ids" property="orderIds" jdbcType="VARCHAR" />
+    <result column="payer_id" property="payerId" jdbcType="INTEGER" />
+    <result column="payer_name" property="payerName" jdbcType="VARCHAR" />
+    <result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
+    <result column="pay_method" property="payMethod" jdbcType="INTEGER" />
+    <result column="transaction_id" property="transactionId" jdbcType="VARCHAR" />
+    <result column="total_fee" property="totalFee" jdbcType="INTEGER" />
+    <result column="pay_state" property="payState" jdbcType="INTEGER" />
+    <result column="pay_time_end" property="payTimeEnd" jdbcType="VARCHAR" />
+    <result column="client_ip" property="clientIp" jdbcType="VARCHAR" />
+    <result column="bank_type" property="bankType" jdbcType="VARCHAR" />
+    <result column="device_info" property="deviceInfo" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="is_subscribe" property="isSubscribe" jdbcType="VARCHAR" />
+    <result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    payment_id, payment_serial, payment_account, payment_time, order_ids, payer_id, payer_name, 
+    out_trade_no, pay_method, transaction_id, total_fee, pay_state, pay_time_end, client_ip, 
+    bank_type, device_info, open_id, is_subscribe, trade_type, create_time, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bl.model.PaymentCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from payment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+      <if test=" limitEnd > 0" >
+        limit #{limitStart} , #{limitEnd}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from payment
+    where payment_id = #{paymentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from payment
+    where payment_id = #{paymentId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bl.model.PaymentCriteria" >
+    delete from payment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bl.model.Payment" useGeneratedKeys="true" keyProperty="paymentId" >
+    insert into payment (payment_id, payment_serial, payment_account, 
+      payment_time, order_ids, payer_id, 
+      payer_name, out_trade_no, pay_method, 
+      transaction_id, total_fee, pay_state, 
+      pay_time_end, client_ip, bank_type, 
+      device_info, open_id, is_subscribe, 
+      trade_type, create_time, update_time
+      )
+    values (#{paymentId,jdbcType=INTEGER}, #{paymentSerial,jdbcType=VARCHAR}, #{paymentAccount,jdbcType=DECIMAL}, 
+      #{paymentTime,jdbcType=TIMESTAMP}, #{orderIds,jdbcType=VARCHAR}, #{payerId,jdbcType=INTEGER}, 
+      #{payerName,jdbcType=VARCHAR}, #{outTradeNo,jdbcType=VARCHAR}, #{payMethod,jdbcType=INTEGER}, 
+      #{transactionId,jdbcType=VARCHAR}, #{totalFee,jdbcType=INTEGER}, #{payState,jdbcType=INTEGER}, 
+      #{payTimeEnd,jdbcType=VARCHAR}, #{clientIp,jdbcType=VARCHAR}, #{bankType,jdbcType=VARCHAR}, 
+      #{deviceInfo,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{isSubscribe,jdbcType=VARCHAR}, 
+      #{tradeType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bl.model.Payment" useGeneratedKeys="true" keyProperty="paymentId" >
+    insert into payment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paymentId != null" >
+        payment_id,
+      </if>
+      <if test="paymentSerial != null" >
+        payment_serial,
+      </if>
+      <if test="paymentAccount != null" >
+        payment_account,
+      </if>
+      <if test="paymentTime != null" >
+        payment_time,
+      </if>
+      <if test="orderIds != null" >
+        order_ids,
+      </if>
+      <if test="payerId != null" >
+        payer_id,
+      </if>
+      <if test="payerName != null" >
+        payer_name,
+      </if>
+      <if test="outTradeNo != null" >
+        out_trade_no,
+      </if>
+      <if test="payMethod != null" >
+        pay_method,
+      </if>
+      <if test="transactionId != null" >
+        transaction_id,
+      </if>
+      <if test="totalFee != null" >
+        total_fee,
+      </if>
+      <if test="payState != null" >
+        pay_state,
+      </if>
+      <if test="payTimeEnd != null" >
+        pay_time_end,
+      </if>
+      <if test="clientIp != null" >
+        client_ip,
+      </if>
+      <if test="bankType != null" >
+        bank_type,
+      </if>
+      <if test="deviceInfo != null" >
+        device_info,
+      </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="isSubscribe != null" >
+        is_subscribe,
+      </if>
+      <if test="tradeType != null" >
+        trade_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paymentId != null" >
+        #{paymentId,jdbcType=INTEGER},
+      </if>
+      <if test="paymentSerial != null" >
+        #{paymentSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentAccount != null" >
+        #{paymentAccount,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentTime != null" >
+        #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderIds != null" >
+        #{orderIds,jdbcType=VARCHAR},
+      </if>
+      <if test="payerId != null" >
+        #{payerId,jdbcType=INTEGER},
+      </if>
+      <if test="payerName != null" >
+        #{payerName,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNo != null" >
+        #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payMethod != null" >
+        #{payMethod,jdbcType=INTEGER},
+      </if>
+      <if test="transactionId != null" >
+        #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        #{totalFee,jdbcType=INTEGER},
+      </if>
+      <if test="payState != null" >
+        #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="payTimeEnd != null" >
+        #{payTimeEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="clientIp != null" >
+        #{clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="bankType != null" >
+        #{bankType,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceInfo != null" >
+        #{deviceInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="isSubscribe != null" >
+        #{isSubscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bl.model.PaymentCriteria" resultType="java.lang.Integer" >
+    select count(*) from payment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update payment
+    <set >
+      <if test="record.paymentId != null" >
+        payment_id = #{record.paymentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.paymentSerial != null" >
+        payment_serial = #{record.paymentSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymentAccount != null" >
+        payment_account = #{record.paymentAccount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.paymentTime != null" >
+        payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderIds != null" >
+        order_ids = #{record.orderIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payerId != null" >
+        payer_id = #{record.payerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.payerName != null" >
+        payer_name = #{record.payerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outTradeNo != null" >
+        out_trade_no = #{record.outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payMethod != null" >
+        pay_method = #{record.payMethod,jdbcType=INTEGER},
+      </if>
+      <if test="record.transactionId != null" >
+        transaction_id = #{record.transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalFee != null" >
+        total_fee = #{record.totalFee,jdbcType=INTEGER},
+      </if>
+      <if test="record.payState != null" >
+        pay_state = #{record.payState,jdbcType=INTEGER},
+      </if>
+      <if test="record.payTimeEnd != null" >
+        pay_time_end = #{record.payTimeEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientIp != null" >
+        client_ip = #{record.clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankType != null" >
+        bank_type = #{record.bankType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceInfo != null" >
+        device_info = #{record.deviceInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openId != null" >
+        open_id = #{record.openId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isSubscribe != null" >
+        is_subscribe = #{record.isSubscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeType != null" >
+        trade_type = #{record.tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update payment
+    set payment_id = #{record.paymentId,jdbcType=INTEGER},
+      payment_serial = #{record.paymentSerial,jdbcType=VARCHAR},
+      payment_account = #{record.paymentAccount,jdbcType=DECIMAL},
+      payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},
+      order_ids = #{record.orderIds,jdbcType=VARCHAR},
+      payer_id = #{record.payerId,jdbcType=INTEGER},
+      payer_name = #{record.payerName,jdbcType=VARCHAR},
+      out_trade_no = #{record.outTradeNo,jdbcType=VARCHAR},
+      pay_method = #{record.payMethod,jdbcType=INTEGER},
+      transaction_id = #{record.transactionId,jdbcType=VARCHAR},
+      total_fee = #{record.totalFee,jdbcType=INTEGER},
+      pay_state = #{record.payState,jdbcType=INTEGER},
+      pay_time_end = #{record.payTimeEnd,jdbcType=VARCHAR},
+      client_ip = #{record.clientIp,jdbcType=VARCHAR},
+      bank_type = #{record.bankType,jdbcType=VARCHAR},
+      device_info = #{record.deviceInfo,jdbcType=VARCHAR},
+      open_id = #{record.openId,jdbcType=VARCHAR},
+      is_subscribe = #{record.isSubscribe,jdbcType=VARCHAR},
+      trade_type = #{record.tradeType,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bl.model.Payment" >
+    update payment
+    <set >
+      <if test="paymentSerial != null" >
+        payment_serial = #{paymentSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentAccount != null" >
+        payment_account = #{paymentAccount,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentTime != null" >
+        payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderIds != null" >
+        order_ids = #{orderIds,jdbcType=VARCHAR},
+      </if>
+      <if test="payerId != null" >
+        payer_id = #{payerId,jdbcType=INTEGER},
+      </if>
+      <if test="payerName != null" >
+        payer_name = #{payerName,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNo != null" >
+        out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payMethod != null" >
+        pay_method = #{payMethod,jdbcType=INTEGER},
+      </if>
+      <if test="transactionId != null" >
+        transaction_id = #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        total_fee = #{totalFee,jdbcType=INTEGER},
+      </if>
+      <if test="payState != null" >
+        pay_state = #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="payTimeEnd != null" >
+        pay_time_end = #{payTimeEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="clientIp != null" >
+        client_ip = #{clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="bankType != null" >
+        bank_type = #{bankType,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceInfo != null" >
+        device_info = #{deviceInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="isSubscribe != null" >
+        is_subscribe = #{isSubscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        trade_type = #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where payment_id = #{paymentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bl.model.Payment" >
+    update payment
+    set payment_serial = #{paymentSerial,jdbcType=VARCHAR},
+      payment_account = #{paymentAccount,jdbcType=DECIMAL},
+      payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      order_ids = #{orderIds,jdbcType=VARCHAR},
+      payer_id = #{payerId,jdbcType=INTEGER},
+      payer_name = #{payerName,jdbcType=VARCHAR},
+      out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      pay_method = #{payMethod,jdbcType=INTEGER},
+      transaction_id = #{transactionId,jdbcType=VARCHAR},
+      total_fee = #{totalFee,jdbcType=INTEGER},
+      pay_state = #{payState,jdbcType=INTEGER},
+      pay_time_end = #{payTimeEnd,jdbcType=VARCHAR},
+      client_ip = #{clientIp,jdbcType=VARCHAR},
+      bank_type = #{bankType,jdbcType=VARCHAR},
+      device_info = #{deviceInfo,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR},
+      is_subscribe = #{isSubscribe,jdbcType=VARCHAR},
+      trade_type = #{tradeType,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where payment_id = #{paymentId,jdbcType=INTEGER}
+  </update>
+</mapper>
