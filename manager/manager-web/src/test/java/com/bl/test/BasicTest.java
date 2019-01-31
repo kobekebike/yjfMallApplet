@@ -26,13 +26,13 @@ public class BasicTest {
 /**
  * 以下注释的代码是范例，可以在该类下进行单元测试，也可以另外写一个类，继承该类
  */
-	@Autowired
-	private UserService userService;
-
-	@Test
-	@Rollback(false) //标明使用完此方法后事务不回滚,true时为回滚
-	public void test(){
-		System.err.println(userService.getAllUserList());
-		System.err.println("22222222222222222222222222");
-	}
+//	@Autowired
+//	private UserService userService;
+//
+//	@Test
+//	@Rollback(false) //标明使用完此方法后事务不回滚,true时为回滚
+//	public void test(){
+//		System.err.println(userService.getAllUserList());
+//		System.err.println("22222222222222222222222222");
+//	}
 }

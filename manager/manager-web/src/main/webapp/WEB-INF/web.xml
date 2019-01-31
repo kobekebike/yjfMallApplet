@@ -37,8 +37,7 @@
   </filter>
   <filter-mapping>
     <filter-name>aclFilter</filter-name>
-    <url-pattern>/ld/*</url-pattern>
-    <url-pattern>/view/*</url-pattern>
+    <url-pattern>*.do</url-pattern>
   </filter-mapping>
 
   <!-- Spring Listener -->
