@@ -13,8 +13,23 @@ public class BasicPageController {
 		return pageName;	//prefix+logicName+suffix
 	}
 
+	/**
+	 * 商品通用转向方法
+	 * @param pageName
+	 * @return
+	 */
 	@RequestMapping("product/{pageName}.do")
 	public String productPage(@PathVariable String pageName){
 		return "product/"+pageName;	//prefix+logicName+suffix
+	}
+
+	/**
+	 * 用户信息通用转向方法
+	 * @param pageName
+	 * @return
+	 */
+	@RequestMapping("userInfo/{pageName}.do")
+	public String userInfoPage(@PathVariable String pageName){
+		return "userInfo/"+pageName;	//prefix+logicName+suffix
 	}
 }

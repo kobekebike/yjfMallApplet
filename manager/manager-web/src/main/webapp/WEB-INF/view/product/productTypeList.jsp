@@ -14,15 +14,6 @@
 <div id="productTypeAddWindow" class="easyui-window" title="新增商品" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/product/productTypeAdd.do'" style="width:30%;height:30%;padding:10px;"></div>
 <div id="productTypeEditWindow" class="easyui-window" title="编辑商品" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/product/productTypeEdit.do'" style="width:30%;height:30%;padding:10px;"></div>
 <script>
-    function dateTimeFormatter(date){
-        date = new Date(date);
-        var y = date.getFullYear();
-        var m = date.getMonth()+1;
-        var d = date.getDate();
-        var h = date.getHours();
-        var min = date.getMinutes();
-        return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d)+" "+(h<10?('0'+h):h)+":"+(min<10?('0'+min):min);
-    }
     function getSelectionsIds(){
     	var productTypeList = $("#productTypeList");
     	var sels = productTypeList.datagrid("getSelections");

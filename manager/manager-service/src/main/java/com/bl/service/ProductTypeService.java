@@ -86,4 +86,14 @@ public class ProductTypeService {
         }
         return Response.createFailResult("删除失败", null);
     }
+
+    /**
+     * 获取所有的类型
+     * @return
+     */
+    public Response getAllProductTypeList() {
+        ProductTypeCriteria productTypeCriteria = new ProductTypeCriteria();
+        productTypeCriteria.setOrderByClause("sort desc");
+        return Response.createSuccessResult("查询成功", productTypeMapper.selectByExample(productTypeCriteria));
+    }
 }

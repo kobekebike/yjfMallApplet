@@ -24,8 +24,7 @@
         <li>
             <span>用户管理</span>
             <ul>
-                <li data-options="attributes:{'url':'/page/content-category'}">内容分类管理</li>
-                <li data-options="attributes:{'url':'/page/content'}">内容管理</li>
+                <li data-options="attributes:{'url':'/userInfo/userList.do'}">用户列表</li>
             </ul>
         </li>
     </ul>
