@@ -85,4 +85,16 @@ public class ProductTypeController {
                                       String ids){
         return productTypeService.deleteProductType(ids);
     }
+
+    /**
+     * 获取所有的类型
+     * @param req
+     * @param res
+     * @return
+     */
+    @RequestMapping("getAllProductTypeList.do")
+    @ResponseBody
+    public Response getAllProductTypeList(HttpServletRequest req, HttpServletResponse res){
+        return productTypeService.getAllProductTypeList();
+    }
 }

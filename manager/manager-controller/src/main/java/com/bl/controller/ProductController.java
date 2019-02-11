@@ -3,7 +3,7 @@ package com.bl.controller;
 import com.bl.base.BasicUtils;
 import com.bl.base.EasyUIResult;
 import com.bl.base.Response;
-import com.bl.model.Product;
+import com.bl.model.ProductWithBLOBs;
 import com.bl.service.ProductService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,28 +50,32 @@ public class ProductController {
      * 保存商品
      * @param req
      * @param res
-     * @param product 对象
+     * @param productWithBLOBs 对象
+     * @param file 主图
+     * @param productDetailText 商品详情
      * @return
      */
     @RequestMapping("saveProduct.do")
     @ResponseBody
     public Response saveProduct(HttpServletRequest req, HttpServletResponse res,
-                                Product product){
-        return productService.saveProduct(product, BasicUtils.getLoginInfo(req));
+                                ProductWithBLOBs productWithBLOBs, @RequestParam(value = "productFile", required = false) MultipartFile file,
+                                @RequestParam(value = "productDetailText", required = false) String productDetailText){
+        return productService.saveProduct(productWithBLOBs, BasicUtils.getLoginInfo(req), file, productDetailText);
     }
 
     /**
      * 修改商品
      * @param req
      * @param res
-     * @param product
+     * @param productWithBLOBs
      * @return
      */
     @RequestMapping("updateProduct.do")
     @ResponseBody
     public Response updateProduct(HttpServletRequest req, HttpServletResponse res,
-                                  Product product){
-        return productService.updateProduct(product);
+                                  ProductWithBLOBs productWithBLOBs, @RequestParam(value = "productFile", required = false) MultipartFile file,
+                                  @RequestParam(value = "productDetailText", required = false) String productDetailText){
+        return productService.updateProduct(productWithBLOBs, file, productDetailText);
     }
 
     /**
@@ -85,5 +90,18 @@ public class ProductController {
     public Response deleteProduct(HttpServletRequest req, HttpServletResponse res,
                                       String ids){
         return productService.deleteProduct(ids);
+    }
+
+    /**
+     * 根据商品标识获取商品详情
+     * @param req
+     * @param res
+     * @param productId
+     * @return
+     */
+    @RequestMapping("getProductDetail.do")
+    @ResponseBody
+    public Response getProductDetail(HttpServletRequest req, HttpServletResponse res, Integer productId){
+        return productService.getProductDetail(productId);
     }
 }

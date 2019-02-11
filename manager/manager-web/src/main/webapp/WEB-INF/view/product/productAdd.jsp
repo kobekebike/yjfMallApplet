@@ -1,44 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div style="padding:10px 10px 10px 10px">
-	<form id="productAddForm" class="productForm" method="post">
+	<form id="productAddForm" class="productForm" method="post" enctype="multipart/form-data">
 	    <table cellpadding="5">
 	        <tr>
 	            <td>商品标题:</td>
-	            <td><input class="easyui-textbox" type="text" name="title" data-options="required:true" style="width: 280px;"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="productTitle" data-options="required:true" style="width: 280px;"></input></td>
 	        </tr>
 			<tr>
 				<td>商品类型:</td>
 				<td>
-					<select class="easyui-combobox" name="language">
-						<option value="uk">Ukrainian</option>
-						<option value="vi">Vietnamese</option>
-					</select>
+					<input class="easyui-combobox" name="productTypeId" id="productTypeSelectId" data-options="required:true"/>
 				</td>
 			</tr>
 	        <tr>
 	            <td>商品价格:</td>
-	            <td><input class="easyui-numberbox" type="text" name="priceView" data-options="min:1,max:99999999,precision:2,required:true" />
+	            <td><input class="easyui-numberbox" type="text" name="productPrice" data-options="min:1,max:99999999,precision:2,required:true" />
 	            	<input type="hidden" name="price"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>商品折扣:</td>
-	            <td><input class="easyui-numberbox" type="text" name="" data-options="min:1,max:99999999" />
+	            <td><input class="easyui-numberbox" type="text" name="productDiscount" data-options="min:1,max:99999999" />
 	            	<input type="hidden" name=""/>
 	            </td>
 	        </tr>
 			<tr>
 				<td>商品排序:</td>
 				<td>
-					<input class="easyui-numberbox" type="text" name="" data-options="min:1,max:99999999" />
+					<input class="easyui-numberbox" type="text" name="productSort" data-options="min:1,max:99999999,required:true"/>
 				</td>
 			</tr>
 	        <tr>
 	            <td>商品主图:</td>
 	            <td>
-					<input class="easyui-numberbox" type="text" name="" />
+					<input style="width:300px" name="productFile" id="productFile" class="easyui-filebox" accept="image/*" data-options='onChange:change_photo'>
 	            </td>
 	        </tr>
+			<tr id="previewPictureId" style="display: none">
+				<td><label>图片预览</label></td>
+				<td> <div id="Imgdiv"><img id="Img" width="200px" height="200px"/></div></td>
+			</tr>
 			<tr>
 				<td>商品描述:</td>
 				<td>
@@ -48,14 +49,17 @@
 			<tr>
 				<td style="width:6%;">商品详情:</td>
 				<td>
-					<textarea id="editor" type="text/plain" style="width:90%;height:300px;" name="productDetail"></textarea>
+					<textarea id="editor" type="text/plain" style="width:90%;height:300px;" name="productDetailText"></textarea>
 				</td>
 			</tr>
 	    </table>
-	    <input type="hidden" name="productParams"/>
+	    <input type="hidden" name="productType"/>
+	    <input type="hidden" name="productId"/>
+	    <input type="hidden" name="productFilePath"/>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton clicking" onclick="submitProductForm()" id="submitProductId" style="display: none;">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton clicking" onclick="updateProductForm()" id="updateProductId" style="display: none;">修改</a>
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
 	</div>
 </div>
@@ -68,37 +72,165 @@
      * 因此，UEditor提供了针对不同页面的编辑器可单独配置的根路径，具体来说，在需要实例化编辑器的页面最顶部写上如下代码即可。当然，需要令此处的URL等于对应的配置。
      * window.UEDITOR_HOME_URL = "/xxxx/xxxx/";
      */
-    window.UEDITOR_HOME_URL = "../../../plugin/ueditor/";
+    window.UEDITOR_HOME_URL = "${pageContext.request.contextPath}/plugin/ueditor/";
 </script>
 <script src="/plugin/ueditor/ueditor.config.js" type="text/javascript" charset="utf-8"></script>
 <script src="/plugin/ueditor/ueditor.all.min.js" type="text/javascript" charset="utf-8"> </script>
 <script src="/plugin/ueditor/lang/zh-cn/zh-cn.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+    var type = "<%=request.getParameter("type")%>";
+    var ue;
 	$(function(){
         //实例化编辑器
-        var ue = UE.getEditor('editor');
+        ue = UE.getEditor('editor');
         UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
         UE.Editor.prototype.getActionUrl = function(action){
-            if(action == "uploadimage" || action == "uploadscrawl" || action == "uploadimage"){
-                return ctxPathName + "/view/docinfo.do?method=uploadUEditorImage";
+            if(action == "uploadimage" || action == "uploadscrawl"){
+                return "/ueditorUploadController/uploadUEditorImage.do";
             }else if(action == "listimage"){
-                return ctxPathName + "/view/docinfo.do?method=uploadUEditorImage";
+                return "/ueditorUploadController/uploadUEditorImage.do";
             }else {
                 return this._bkGetActionUrl.call(this, action);
             }
         }
+
+        //显示商品类型
+        showProductType();
 	});
-	
-	function submitForm(){
+
+	//查询商品类型
+	function showProductType() {
+		var url = "/productTypeController/getAllProductTypeList.do";
+		var data = requestAjaxData(url,false,true);
+		if(data.code == "0"){
+		    var result = data.data;
+		    if(result && result.length > 0 && result[0]){
+		        //unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。
+		        result.unshift({typeId:'',typeName:'请选择'});
+				$("#productTypeSelectId").combobox({
+					data:result,
+					valueField:'typeId',
+					textField:'typeName',
+					panelHeight:'auto'
+				});
+			}
+		}
+    }
+	//保存商品
+	function submitProductForm(){
+
 		//表单校验
 		if(!$('#productAddForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
+		if($("#productTypeSelectId").combobox("getText") != "请选择"){
+        	$("#productAddForm [name=productType]").val($("#productTypeSelectId").combobox("getText"));
+		}else{
+            $.messager.alert('提示','请选择类型');
+            return ;
+		}
+        //获取httml内容
+		// $("#productAddForm [name=productDetailText]").val(ue.getContent());
+
+        var url = "/productController/saveProduct.do";
+        var data = ajaxFormSubmit('productAddForm', "submitProductId", url, false);
+        $.messager.alert("提示",data.message);
+        if(data.code == 0){
+            clearForm();
+            $("#submitProductId").addClass("clicking")
+            $("#productAddAndEditWindow").window("close");
+            $('#productList').datagrid('reload');
+        }
 	}
 	
 	function clearForm(){
 		$('#productAddForm').form('reset');
-		productAddEditor.html('');
+        ue.setContent('');
+	}
+
+    function change_photo(){
+        PreviewImage($("input[name='productFile']")[0], 'Img', 'Imgdiv');
+    }
+
+    function PreviewImage(fileObj,imgPreviewId,divPreviewId){
+        var allowExtention=".jpg,.bmp,.gif,.png";//允许上传文件的后缀名document.getElementById("hfAllowPicSuffix").value;
+        var extention=fileObj.value.substring(fileObj.value.lastIndexOf(".")+1).toLowerCase();
+        var browserVersion= window.navigator.userAgent.toUpperCase();
+        if(allowExtention.indexOf(extention)>-1){
+            if(fileObj.files){//HTML5实现预览，兼容chrome、火狐7+等
+                if(window.FileReader){
+                    var reader = new FileReader();
+                    reader.onload = function(e){
+                        document.getElementById(imgPreviewId).setAttribute("src",e.target.result);
+                    }
+                    reader.readAsDataURL(fileObj.files[0]);
+                }else if(browserVersion.indexOf("SAFARI")>-1){
+                    alert("不支持Safari6.0以下浏览器的图片预览!");
+                }
+            }else if (browserVersion.indexOf("MSIE")>-1){
+                if(browserVersion.indexOf("MSIE 6")>-1){//ie6
+                    document.getElementById(imgPreviewId).setAttribute("src",fileObj.value);
+                }else{//ie[7-9]
+                    fileObj.select();
+                    if(browserVersion.indexOf("MSIE 9")>-1)
+                        fileObj.blur();//不加上document.selection.createRange().text在ie9会拒绝访问
+                    var newPreview =document.getElementById(divPreviewId+"New");
+                    if(newPreview==null){
+                        newPreview =document.createElement("div");
+                        newPreview.setAttribute("id",divPreviewId+"New");
+                        newPreview.style.width = document.getElementById(imgPreviewId).width+"px";
+                        newPreview.style.height = document.getElementById(imgPreviewId).height+"px";
+                        newPreview.style.border="solid 1px #d2e2e2";
+                    }
+                    newPreview.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale',src='" + document.selection.createRange().text + "')";
+                    var tempDivPreview=document.getElementById(divPreviewId);
+                    tempDivPreview.parentNode.insertBefore(newPreview,tempDivPreview);
+                    tempDivPreview.style.display="none";
+                }
+            }else if(browserVersion.indexOf("FIREFOX")>-1){//firefox
+                var firefoxVersion= parseFloat(browserVersion.toLowerCase().match(/firefox\/([\d.]+)/)[1]);
+                if(firefoxVersion<7){//firefox7以下版本
+                    document.getElementById(imgPreviewId).setAttribute("src",fileObj.files[0].getAsDataURL());
+                }else{//firefox7.0+
+                    document.getElementById(imgPreviewId).setAttribute("src",window.URL.createObjectURL(fileObj.files[0]));
+                }
+            }else{
+                document.getElementById(imgPreviewId).setAttribute("src",fileObj.value);
+            }
+            $("#previewPictureId").show();
+        }else{
+            alert("仅支持"+allowExtention+"为后缀名的文件!");
+            fileObj.value="";//清空选中文件
+            if(browserVersion.indexOf("MSIE")>-1){
+                fileObj.select();
+                document.selection.clear();
+            }
+            fileObj.outerHTML=fileObj.outerHTML;
+            $("#previewPictureId").hide();
+        }
+    }
+	//修改商品
+    function updateProductForm(){
+		//表单校验
+        if(!$('#productAddForm').form('validate')){
+            $.messager.alert('提示','表单还未填写完成!');
+            return ;
+        }
+        if($("#productTypeSelectId").combobox("getText") != "请选择"){
+            $("#productAddForm [name=productType]").val($("#productTypeSelectId").combobox("getText"));
+        }else{
+            $.messager.alert('提示','请选择类型');
+            return ;
+        }
+        var url = "/productController/updateProduct.do";
+        var data = ajaxFormSubmit('productAddForm', "submitProductId", url, false);
+        $.messager.alert("提示",data.message);
+        if(data.code == 0){
+            clearForm();
+            $("#submitProductId").addClass("clicking")
+            $("#productAddAndEditWindow").window("close");
+            $('#productList').datagrid('reload');
+        }
 	}
 </script>
