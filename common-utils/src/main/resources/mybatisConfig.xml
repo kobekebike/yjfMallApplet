@@ -8,7 +8,7 @@
   <classPathEntry location="D:\mavenLibrary\m2\repository\mysql\mysql-connector-java\5.1.22\mysql-connector-java-5.1.22.jar" />
   	
 
-  <context id="mysql" targetRuntime="MyBatis3">    <!-- MyBatis3  / Ibatis2Java5 -->
+  <context id="mysql" defaultModelType="hierarchical" targetRuntime="MyBatis3">    <!-- MyBatis3  / Ibatis2Java5 -->
       <!-- 指定生成的java文件的编码,没有直接生成到项目时中文可能会乱码 -->
       <property name="javaFileEncoding" value="UTF-8"/>
 
@@ -73,7 +73,7 @@
 
 
 
-    <table  tableName="product_type" domainObjectName="ProductType" >
+    <table  tableName="product" domainObjectName="Product" >
       <property name="useActualColumnNames" value="false"/>
       <!--  <generatedKey column="ID" sqlStatement="DB2" identity="true" />
       <columnOverride column="DATE_FIELD" property="startDate" />

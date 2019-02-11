@@ -3,12 +3,7 @@ package com.bl.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Product {
-    /**
-     * 唯一标识
-     */
-    private Integer productId;
-
+public class Product extends ProductKey {
     /**
      * 产品描述
      */
@@ -78,27 +73,6 @@ public class Product {
      * 修改时间
      */
     private Date updateTime;
-
-    /**
-     * 商品详情（通过百度编辑器）
-     */
-    private byte[] productDetail;
-
-    /**
-     * 唯一标识
-     * @return product_id 唯一标识
-     */
-    public Integer getProductId() {
-        return productId;
-    }
-
-    /**
-     * 唯一标识
-     * @param productId 唯一标识
-     */
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
 
     /**
      * 产品描述
@@ -324,29 +298,12 @@ public class Product {
         this.updateTime = updateTime;
     }
 
-    /**
-     * 商品详情（通过百度编辑器）
-     * @return product_detail 商品详情（通过百度编辑器）
-     */
-    public byte[] getProductDetail() {
-        return productDetail;
-    }
-
-    /**
-     * 商品详情（通过百度编辑器）
-     * @param productDetail 商品详情（通过百度编辑器）
-     */
-    public void setProductDetail(byte[] productDetail) {
-        this.productDetail = productDetail;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", productId=").append(productId);
         sb.append(", productDescribe=").append(productDescribe);
         sb.append(", productPrice=").append(productPrice);
         sb.append(", createName=").append(createName);
@@ -361,7 +318,6 @@ public class Product {
         sb.append(", productSort=").append(productSort);
         sb.append(", productCode=").append(productCode);
         sb.append(", updateTime=").append(updateTime);
-        sb.append(", productDetail=").append(productDetail);
         sb.append("]");
         return sb.toString();
     }
