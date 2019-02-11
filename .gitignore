@@ -5,7 +5,11 @@
 # IntelliJ project files
 .idea
 *.iml
-out
-gen
+*.log
 .gitignore
 .idea/workspace.xml
+
+# For a project mostly in C, the following would be a good set of
+# exclude patterns (uncomment them if you want to use them):
+# *.[oa]
+# *~

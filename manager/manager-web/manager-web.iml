@@ -30,6 +30,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: com.bl:common-utils:1.0-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="manager-controller" />
     <orderEntry type="module" module-name="manager-service" />
     <orderEntry type="module" module-name="manager-dao" />
