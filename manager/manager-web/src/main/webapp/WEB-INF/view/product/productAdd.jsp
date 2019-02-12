@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+    String ctxPathName = request.getContextPath();
+%>
 <div style="padding:10px 10px 10px 10px">
 	<form id="productAddForm" class="productForm" method="post" enctype="multipart/form-data">
 	    <table cellpadding="5">
@@ -70,9 +73,9 @@
      * "相对于网站根目录的相对路径"也就是以斜杠开头的形如"/myProject/ueditor/"这样的路径。
      * 如果站点中有多个不在同一层级的页面需要实例化编辑器，且引用了同一UEditor的时候，此处的URL可能不适用于每个页面的编辑器。
      * 因此，UEditor提供了针对不同页面的编辑器可单独配置的根路径，具体来说，在需要实例化编辑器的页面最顶部写上如下代码即可。当然，需要令此处的URL等于对应的配置。
-     * window.UEDITOR_HOME_URL = "/xxxx/xxxx/";
+     * window.UEDITOR_HOME_URL = "/xxxx/xxxx/";String ctxPathName = request.getContextPath();
      */
-    window.UEDITOR_HOME_URL = "${pageContext.request.contextPath}/plugin/ueditor/";
+    window.UEDITOR_HOME_URL = "<%=ctxPathName%>/plugin/ueditor/";
 </script>
 <script src="/plugin/ueditor/ueditor.config.js" type="text/javascript" charset="utf-8"></script>
 <script src="/plugin/ueditor/ueditor.all.min.js" type="text/javascript" charset="utf-8"> </script>
