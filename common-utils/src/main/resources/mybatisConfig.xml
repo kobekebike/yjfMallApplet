@@ -44,7 +44,7 @@
     </jdbcConnection>-->
       <!--boss运营平台2.0-->
       <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-              connectionURL="jdbc:mysql://localhost:3306/test1105"
+              connectionURL="jdbc:mysql://localhost:3306/yjf_db"
               userId="root"
               password="123456">
       </jdbcConnection>
@@ -55,25 +55,25 @@
 
 
   <javaModelGenerator targetPackage="com.bl.model"
-      targetProject="D:\ideaworkspace\billionLuckys\common-utils\src\main\java">
+      targetProject="D:\ideaworkspace\git20190123\yjfMallApplet\common-utils\src\main\java">
       <property name="enableSubPackages" value="true" />
       <property name="trimStrings" value="true" />
     </javaModelGenerator>
 
     <sqlMapGenerator targetPackage="com.bl.sqlmap"
-      targetProject="D:\ideaworkspace\billionLuckys\common-utils\src\main\resources">
+      targetProject="D:\ideaworkspace\git20190123\yjfMallApplet\common-utils\src\main\resources">
       <property name="enableSubPackages" value="true" />
     </sqlMapGenerator>
 
 
     <javaClientGenerator type="XMLMAPPER" targetPackage="com.bl.dao"
-      targetProject="D:\ideaworkspace\billionLuckys\common-utils\src\main\java">
+      targetProject="D:\ideaworkspace\git20190123\yjfMallApplet\common-utils\src\main\java">
       <property name="enableSubPackages" value="true" />
     </javaClientGenerator>
 
 
 
-    <table  tableName="user" domainObjectName="User" >
+    <table  tableName="address" domainObjectName="Address" >
       <property name="useActualColumnNames" value="false"/>
       <!--  <generatedKey column="ID" sqlStatement="DB2" identity="true" />
       <columnOverride column="DATE_FIELD" property="startDate" />

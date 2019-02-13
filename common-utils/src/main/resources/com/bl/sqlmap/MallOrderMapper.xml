@@ -5,7 +5,7 @@
     <id column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="order_num" property="orderNum" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="payment_id" property="paymentId" jdbcType="INTEGER" />
     <result column="order_amount" property="orderAmount" jdbcType="DECIMAL" />
     <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
@@ -16,6 +16,8 @@
     <result column="create_name" property="createName" jdbcType="VARCHAR" />
     <result column="address_id" property="addressId" jdbcType="INTEGER" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="product_num" property="productNum" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -76,8 +78,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    order_id, order_num, user_id, comment, payment_id, order_amount, send_time, order_status, 
-    pay_time, create_time, create_id, create_name, address_id, update_time
+    order_id, order_num, user_id, remark, payment_id, order_amount, send_time, order_status, 
+    pay_time, create_time, create_id, create_name, address_id, update_time, product_id, 
+    product_num
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bl.model.MallOrderCriteria" >
     select
@@ -114,15 +117,17 @@
   </delete>
   <insert id="insert" parameterType="com.bl.model.MallOrder" useGeneratedKeys="true" keyProperty="orderId" >
     insert into mall_order (order_id, order_num, user_id, 
-      comment, payment_id, order_amount, 
+      remark, payment_id, order_amount, 
       send_time, order_status, pay_time, 
       create_time, create_id, create_name, 
-      address_id, update_time)
+      address_id, update_time, product_id, 
+      product_num)
     values (#{orderId,jdbcType=INTEGER}, #{orderNum,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
-      #{comment,jdbcType=VARCHAR}, #{paymentId,jdbcType=INTEGER}, #{orderAmount,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{paymentId,jdbcType=INTEGER}, #{orderAmount,jdbcType=DECIMAL}, 
       #{sendTime,jdbcType=TIMESTAMP}, #{orderStatus,jdbcType=INTEGER}, #{payTime,jdbcType=TIMESTAMP}, 
       #{createTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=INTEGER}, #{createName,jdbcType=VARCHAR}, 
-      #{addressId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP})
+      #{addressId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{productId,jdbcType=INTEGER}, 
+      #{productNum,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.bl.model.MallOrder" useGeneratedKeys="true" keyProperty="orderId" >
     insert into mall_order
@@ -136,8 +141,8 @@
       <if test="userId != null" >
         user_id,
       </if>
-      <if test="comment != null" >
-        comment,
+      <if test="remark != null" >
+        remark,
       </if>
       <if test="paymentId != null" >
         payment_id,
@@ -169,6 +174,12 @@
       <if test="updateTime != null" >
         update_time,
       </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productNum != null" >
+        product_num,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -180,8 +191,8 @@
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="comment != null" >
-        #{comment,jdbcType=VARCHAR},
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
       </if>
       <if test="paymentId != null" >
         #{paymentId,jdbcType=INTEGER},
@@ -213,6 +224,12 @@
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productNum != null" >
+        #{productNum,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.bl.model.MallOrderCriteria" resultType="java.lang.Integer" >
@@ -233,8 +250,8 @@
       <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.comment != null" >
-        comment = #{record.comment,jdbcType=VARCHAR},
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
       </if>
       <if test="record.paymentId != null" >
         payment_id = #{record.paymentId,jdbcType=INTEGER},
@@ -266,6 +283,12 @@
       <if test="record.updateTime != null" >
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=INTEGER},
+      </if>
+      <if test="record.productNum != null" >
+        product_num = #{record.productNum,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -276,7 +299,7 @@
     set order_id = #{record.orderId,jdbcType=INTEGER},
       order_num = #{record.orderNum,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=INTEGER},
-      comment = #{record.comment,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
       payment_id = #{record.paymentId,jdbcType=INTEGER},
       order_amount = #{record.orderAmount,jdbcType=DECIMAL},
       send_time = #{record.sendTime,jdbcType=TIMESTAMP},
@@ -286,7 +309,9 @@
       create_id = #{record.createId,jdbcType=INTEGER},
       create_name = #{record.createName,jdbcType=VARCHAR},
       address_id = #{record.addressId,jdbcType=INTEGER},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      product_id = #{record.productId,jdbcType=INTEGER},
+      product_num = #{record.productNum,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -300,8 +325,8 @@
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="comment != null" >
-        comment = #{comment,jdbcType=VARCHAR},
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="paymentId != null" >
         payment_id = #{paymentId,jdbcType=INTEGER},
@@ -333,6 +358,12 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productNum != null" >
+        product_num = #{productNum,jdbcType=INTEGER},
+      </if>
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
@@ -340,7 +371,7 @@
     update mall_order
     set order_num = #{orderNum,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
-      comment = #{comment,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
       payment_id = #{paymentId,jdbcType=INTEGER},
       order_amount = #{orderAmount,jdbcType=DECIMAL},
       send_time = #{sendTime,jdbcType=TIMESTAMP},
@@ -350,7 +381,9 @@
       create_id = #{createId,jdbcType=INTEGER},
       create_name = #{createName,jdbcType=VARCHAR},
       address_id = #{addressId,jdbcType=INTEGER},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      product_id = #{productId,jdbcType=INTEGER},
+      product_num = #{productNum,jdbcType=INTEGER}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
 </mapper>

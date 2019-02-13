@@ -9,14 +9,19 @@ public class Address {
     private Integer addressId;
 
     /**
-     * 渠道公司标识（最新下单公司）
+     * 关联用户标识
      */
-    private String channelId;
+    private Integer userId;
 
     /**
-     *  地区代码
+     * 所在地区编码
      */
     private String cityCode;
+
+    /**
+     * 所在地区名称
+     */
+    private String cityName;
 
     /**
      * 联系电话
@@ -46,12 +51,7 @@ public class Address {
     /**
      * 是否默认地址
      */
-    private Boolean isDeauflt;
-
-    /**
-     * 所在地区详情
-     */
-    private String cityName;
+    private Boolean isDefault;
 
     /**
      * 修改时间
@@ -75,35 +75,51 @@ public class Address {
     }
 
     /**
-     * 渠道公司标识（最新下单公司）
-     * @return channel_id 渠道公司标识（最新下单公司）
+     * 关联用户标识
+     * @return user_id 关联用户标识
      */
-    public String getChannelId() {
-        return channelId;
+    public Integer getUserId() {
+        return userId;
     }
 
     /**
-     * 渠道公司标识（最新下单公司）
-     * @param channelId 渠道公司标识（最新下单公司）
+     * 关联用户标识
+     * @param userId 关联用户标识
      */
-    public void setChannelId(String channelId) {
-        this.channelId = channelId == null ? null : channelId.trim();
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     /**
-     *  地区代码
-     * @return city_code  地区代码
+     * 所在地区编码
+     * @return city_code 所在地区编码
      */
     public String getCityCode() {
         return cityCode;
     }
 
     /**
-     *  地区代码
-     * @param cityCode  地区代码
+     * 所在地区编码
+     * @param cityCode 所在地区编码
      */
     public void setCityCode(String cityCode) {
         this.cityCode = cityCode == null ? null : cityCode.trim();
+    }
+
+    /**
+     * 所在地区名称
+     * @return city_name 所在地区名称
+     */
+    public String getCityName() {
+        return cityName;
+    }
+
+    /**
+     * 所在地区名称
+     * @param cityName 所在地区名称
+     */
+    public void setCityName(String cityName) {
+        this.cityName = cityName == null ? null : cityName.trim();
     }
 
     /**
@@ -188,34 +204,18 @@ public class Address {
 
     /**
      * 是否默认地址
-     * @return is_deauflt 是否默认地址
+     * @return is_default 是否默认地址
      */
-    public Boolean getIsDeauflt() {
-        return isDeauflt;
+    public Boolean getIsDefault() {
+        return isDefault;
     }
 
     /**
      * 是否默认地址
-     * @param isDeauflt 是否默认地址
+     * @param isDefault 是否默认地址
      */
-    public void setIsDeauflt(Boolean isDeauflt) {
-        this.isDeauflt = isDeauflt;
-    }
-
-    /**
-     * 所在地区详情
-     * @return city_name 所在地区详情
-     */
-    public String getCityName() {
-        return cityName;
-    }
-
-    /**
-     * 所在地区详情
-     * @param cityName 所在地区详情
-     */
-    public void setCityName(String cityName) {
-        this.cityName = cityName == null ? null : cityName.trim();
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
     }
 
     /**
@@ -241,15 +241,15 @@ public class Address {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", addressId=").append(addressId);
-        sb.append(", channelId=").append(channelId);
+        sb.append(", userId=").append(userId);
         sb.append(", cityCode=").append(cityCode);
+        sb.append(", cityName=").append(cityName);
         sb.append(", phone=").append(phone);
         sb.append(", detailAddress=").append(detailAddress);
         sb.append(", createName=").append(createName);
         sb.append(", createId=").append(createId);
         sb.append(", createTime=").append(createTime);
-        sb.append(", isDeauflt=").append(isDeauflt);
-        sb.append(", cityName=").append(cityName);
+        sb.append(", isDefault=").append(isDefault);
         sb.append(", updateTime=").append(updateTime);
         sb.append("]");
         return sb.toString();

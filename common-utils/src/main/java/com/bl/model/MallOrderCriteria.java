@@ -1,5 +1,6 @@
 package com.bl.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -100,7 +101,7 @@ public class MallOrderCriteria {
     }
 
     /**
-     * mall_order 2019-01-25
+     * mall_order 2019-02-11
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -333,73 +334,73 @@ public class MallOrderCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andCommentIsNull() {
-            addCriterion("comment is null");
+        public Criteria andRemarkIsNull() {
+            addCriterion("remark is null");
             return (Criteria) this;
         }
 
-        public Criteria andCommentIsNotNull() {
-            addCriterion("comment is not null");
+        public Criteria andRemarkIsNotNull() {
+            addCriterion("remark is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCommentEqualTo(String value) {
-            addCriterion("comment =", value, "comment");
+        public Criteria andRemarkEqualTo(String value) {
+            addCriterion("remark =", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andCommentNotEqualTo(String value) {
-            addCriterion("comment <>", value, "comment");
+        public Criteria andRemarkNotEqualTo(String value) {
+            addCriterion("remark <>", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andCommentGreaterThan(String value) {
-            addCriterion("comment >", value, "comment");
+        public Criteria andRemarkGreaterThan(String value) {
+            addCriterion("remark >", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andCommentGreaterThanOrEqualTo(String value) {
-            addCriterion("comment >=", value, "comment");
+        public Criteria andRemarkGreaterThanOrEqualTo(String value) {
+            addCriterion("remark >=", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andCommentLessThan(String value) {
-            addCriterion("comment <", value, "comment");
+        public Criteria andRemarkLessThan(String value) {
+            addCriterion("remark <", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andCommentLessThanOrEqualTo(String value) {
-            addCriterion("comment <=", value, "comment");
+        public Criteria andRemarkLessThanOrEqualTo(String value) {
+            addCriterion("remark <=", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andCommentLike(String value) {
-            addCriterion("comment like", value, "comment");
+        public Criteria andRemarkLike(String value) {
+            addCriterion("remark like", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andCommentNotLike(String value) {
-            addCriterion("comment not like", value, "comment");
+        public Criteria andRemarkNotLike(String value) {
+            addCriterion("remark not like", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andCommentIn(List<String> values) {
-            addCriterion("comment in", values, "comment");
+        public Criteria andRemarkIn(List<String> values) {
+            addCriterion("remark in", values, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andCommentNotIn(List<String> values) {
-            addCriterion("comment not in", values, "comment");
+        public Criteria andRemarkNotIn(List<String> values) {
+            addCriterion("remark not in", values, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andCommentBetween(String value1, String value2) {
-            addCriterion("comment between", value1, value2, "comment");
+        public Criteria andRemarkBetween(String value1, String value2) {
+            addCriterion("remark between", value1, value2, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andCommentNotBetween(String value1, String value2) {
-            addCriterion("comment not between", value1, value2, "comment");
+        public Criteria andRemarkNotBetween(String value1, String value2) {
+            addCriterion("remark not between", value1, value2, "remark");
             return (Criteria) this;
         }
 
@@ -473,52 +474,52 @@ public class MallOrderCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andOrderAmountEqualTo(Long value) {
+        public Criteria andOrderAmountEqualTo(BigDecimal value) {
             addCriterion("order_amount =", value, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andOrderAmountNotEqualTo(Long value) {
+        public Criteria andOrderAmountNotEqualTo(BigDecimal value) {
             addCriterion("order_amount <>", value, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andOrderAmountGreaterThan(Long value) {
+        public Criteria andOrderAmountGreaterThan(BigDecimal value) {
             addCriterion("order_amount >", value, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andOrderAmountGreaterThanOrEqualTo(Long value) {
+        public Criteria andOrderAmountGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("order_amount >=", value, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andOrderAmountLessThan(Long value) {
+        public Criteria andOrderAmountLessThan(BigDecimal value) {
             addCriterion("order_amount <", value, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andOrderAmountLessThanOrEqualTo(Long value) {
+        public Criteria andOrderAmountLessThanOrEqualTo(BigDecimal value) {
             addCriterion("order_amount <=", value, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andOrderAmountIn(List<Long> values) {
+        public Criteria andOrderAmountIn(List<BigDecimal> values) {
             addCriterion("order_amount in", values, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andOrderAmountNotIn(List<Long> values) {
+        public Criteria andOrderAmountNotIn(List<BigDecimal> values) {
             addCriterion("order_amount not in", values, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andOrderAmountBetween(Long value1, Long value2) {
+        public Criteria andOrderAmountBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("order_amount between", value1, value2, "orderAmount");
             return (Criteria) this;
         }
 
-        public Criteria andOrderAmountNotBetween(Long value1, Long value2) {
+        public Criteria andOrderAmountNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("order_amount not between", value1, value2, "orderAmount");
             return (Criteria) this;
         }
@@ -1012,6 +1013,126 @@ public class MallOrderCriteria {
             addCriterion("update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }
+
+        public Criteria andProductIdIsNull() {
+            addCriterion("product_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdIsNotNull() {
+            addCriterion("product_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdEqualTo(Integer value) {
+            addCriterion("product_id =", value, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdNotEqualTo(Integer value) {
+            addCriterion("product_id <>", value, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdGreaterThan(Integer value) {
+            addCriterion("product_id >", value, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("product_id >=", value, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdLessThan(Integer value) {
+            addCriterion("product_id <", value, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdLessThanOrEqualTo(Integer value) {
+            addCriterion("product_id <=", value, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdIn(List<Integer> values) {
+            addCriterion("product_id in", values, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdNotIn(List<Integer> values) {
+            addCriterion("product_id not in", values, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdBetween(Integer value1, Integer value2) {
+            addCriterion("product_id between", value1, value2, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("product_id not between", value1, value2, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductNumIsNull() {
+            addCriterion("product_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductNumIsNotNull() {
+            addCriterion("product_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductNumEqualTo(Integer value) {
+            addCriterion("product_num =", value, "productNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductNumNotEqualTo(Integer value) {
+            addCriterion("product_num <>", value, "productNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductNumGreaterThan(Integer value) {
+            addCriterion("product_num >", value, "productNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductNumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("product_num >=", value, "productNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductNumLessThan(Integer value) {
+            addCriterion("product_num <", value, "productNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductNumLessThanOrEqualTo(Integer value) {
+            addCriterion("product_num <=", value, "productNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductNumIn(List<Integer> values) {
+            addCriterion("product_num in", values, "productNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductNumNotIn(List<Integer> values) {
+            addCriterion("product_num not in", values, "productNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductNumBetween(Integer value1, Integer value2) {
+            addCriterion("product_num between", value1, value2, "productNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductNumNotBetween(Integer value1, Integer value2) {
+            addCriterion("product_num not between", value1, value2, "productNum");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -1022,7 +1143,7 @@ public class MallOrderCriteria {
     }
 
     /**
-     * mall_order 2019-01-25
+     * mall_order 2019-02-11
      */
     public static class Criterion {
         private String condition;

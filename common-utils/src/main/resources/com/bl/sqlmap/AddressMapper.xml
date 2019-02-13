@@ -3,15 +3,15 @@
 <mapper namespace="com.bl.dao.AddressMapper" >
   <resultMap id="BaseResultMap" type="com.bl.model.Address" >
     <id column="address_id" property="addressId" jdbcType="INTEGER" />
-    <result column="channel_id" property="channelId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="city_code" property="cityCode" jdbcType="VARCHAR" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="detail_address" property="detailAddress" jdbcType="VARCHAR" />
     <result column="create_name" property="createName" jdbcType="VARCHAR" />
     <result column="create_id" property="createId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="is_deauflt" property="isDeauflt" jdbcType="BIT" />
-    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="is_default" property="isDefault" jdbcType="BIT" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -73,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    address_id, channel_id, city_code, phone, detail_address, create_name, create_id, 
-    create_time, is_deauflt, city_name, update_time
+    address_id, user_id, city_code, city_name, phone, detail_address, create_name, create_id, 
+    create_time, is_default, update_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bl.model.AddressCriteria" >
     select
@@ -110,14 +110,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.bl.model.Address" useGeneratedKeys="true" keyProperty="addressId" >
-    insert into address (address_id, channel_id, city_code, 
-      phone, detail_address, create_name, 
-      create_id, create_time, is_deauflt, 
-      city_name, update_time)
-    values (#{addressId,jdbcType=INTEGER}, #{channelId,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{detailAddress,jdbcType=VARCHAR}, #{createName,jdbcType=VARCHAR}, 
-      #{createId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{isDeauflt,jdbcType=BIT}, 
-      #{cityName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+    insert into address (address_id, user_id, city_code, 
+      city_name, phone, detail_address, 
+      create_name, create_id, create_time, 
+      is_default, update_time)
+    values (#{addressId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{cityCode,jdbcType=VARCHAR}, 
+      #{cityName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{detailAddress,jdbcType=VARCHAR}, 
+      #{createName,jdbcType=VARCHAR}, #{createId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{isDefault,jdbcType=BIT}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.bl.model.Address" useGeneratedKeys="true" keyProperty="addressId" >
     insert into address
@@ -125,11 +125,14 @@
       <if test="addressId != null" >
         address_id,
       </if>
-      <if test="channelId != null" >
-        channel_id,
+      <if test="userId != null" >
+        user_id,
       </if>
       <if test="cityCode != null" >
         city_code,
+      </if>
+      <if test="cityName != null" >
+        city_name,
       </if>
       <if test="phone != null" >
         phone,
@@ -146,11 +149,8 @@
       <if test="createTime != null" >
         create_time,
       </if>
-      <if test="isDeauflt != null" >
-        is_deauflt,
-      </if>
-      <if test="cityName != null" >
-        city_name,
+      <if test="isDefault != null" >
+        is_default,
       </if>
       <if test="updateTime != null" >
         update_time,
@@ -160,11 +160,14 @@
       <if test="addressId != null" >
         #{addressId,jdbcType=INTEGER},
       </if>
-      <if test="channelId != null" >
-        #{channelId,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="cityCode != null" >
         #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
         #{phone,jdbcType=VARCHAR},
@@ -181,11 +184,8 @@
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="isDeauflt != null" >
-        #{isDeauflt,jdbcType=BIT},
-      </if>
-      <if test="cityName != null" >
-        #{cityName,jdbcType=VARCHAR},
+      <if test="isDefault != null" >
+        #{isDefault,jdbcType=BIT},
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
@@ -204,11 +204,14 @@
       <if test="record.addressId != null" >
         address_id = #{record.addressId,jdbcType=INTEGER},
       </if>
-      <if test="record.channelId != null" >
-        channel_id = #{record.channelId,jdbcType=VARCHAR},
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.cityCode != null" >
         city_code = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityName != null" >
+        city_name = #{record.cityName,jdbcType=VARCHAR},
       </if>
       <if test="record.phone != null" >
         phone = #{record.phone,jdbcType=VARCHAR},
@@ -225,11 +228,8 @@
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.isDeauflt != null" >
-        is_deauflt = #{record.isDeauflt,jdbcType=BIT},
-      </if>
-      <if test="record.cityName != null" >
-        city_name = #{record.cityName,jdbcType=VARCHAR},
+      <if test="record.isDefault != null" >
+        is_default = #{record.isDefault,jdbcType=BIT},
       </if>
       <if test="record.updateTime != null" >
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -242,15 +242,15 @@
   <update id="updateByExample" parameterType="map" >
     update address
     set address_id = #{record.addressId,jdbcType=INTEGER},
-      channel_id = #{record.channelId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
       city_code = #{record.cityCode,jdbcType=VARCHAR},
+      city_name = #{record.cityName,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       detail_address = #{record.detailAddress,jdbcType=VARCHAR},
       create_name = #{record.createName,jdbcType=VARCHAR},
       create_id = #{record.createId,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      is_deauflt = #{record.isDeauflt,jdbcType=BIT},
-      city_name = #{record.cityName,jdbcType=VARCHAR},
+      is_default = #{record.isDefault,jdbcType=BIT},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -259,11 +259,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.bl.model.Address" >
     update address
     <set >
-      <if test="channelId != null" >
-        channel_id = #{channelId,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="cityCode != null" >
         city_code = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        city_name = #{cityName,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
         phone = #{phone,jdbcType=VARCHAR},
@@ -280,11 +283,8 @@
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="isDeauflt != null" >
-        is_deauflt = #{isDeauflt,jdbcType=BIT},
-      </if>
-      <if test="cityName != null" >
-        city_name = #{cityName,jdbcType=VARCHAR},
+      <if test="isDefault != null" >
+        is_default = #{isDefault,jdbcType=BIT},
       </if>
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
@@ -294,15 +294,15 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bl.model.Address" >
     update address
-    set channel_id = #{channelId,jdbcType=VARCHAR},
+    set user_id = #{userId,jdbcType=INTEGER},
       city_code = #{cityCode,jdbcType=VARCHAR},
+      city_name = #{cityName,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       detail_address = #{detailAddress,jdbcType=VARCHAR},
       create_name = #{createName,jdbcType=VARCHAR},
       create_id = #{createId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      is_deauflt = #{isDeauflt,jdbcType=BIT},
-      city_name = #{cityName,jdbcType=VARCHAR},
+      is_default = #{isDefault,jdbcType=BIT},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where address_id = #{addressId,jdbcType=INTEGER}
   </update>

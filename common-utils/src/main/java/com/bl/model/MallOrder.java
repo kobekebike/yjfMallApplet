@@ -1,5 +1,6 @@
 package com.bl.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class MallOrder {
@@ -14,14 +15,14 @@ public class MallOrder {
     private String orderNum;
 
     /**
-     * 渠道客户标识（下单公司名称）
+     * 用户标识
      */
     private Integer userId;
 
     /**
      * 备注留言
      */
-    private String comment;
+    private String remark;
 
     /**
      * 付款流水
@@ -31,7 +32,7 @@ public class MallOrder {
     /**
      * 订单金额
      */
-    private Long orderAmount;
+    private BigDecimal orderAmount;
 
     /**
      * 发货时间
@@ -74,6 +75,16 @@ public class MallOrder {
     private Date updateTime;
 
     /**
+     * 商品标识
+     */
+    private Integer productId;
+
+    /**
+     * 商品数量
+     */
+    private Integer productNum;
+
+    /**
      * 唯一标识（主键）
      * @return order_id 唯一标识（主键）
      */
@@ -106,16 +117,16 @@ public class MallOrder {
     }
 
     /**
-     * 渠道客户标识（下单公司名称）
-     * @return user_id 渠道客户标识（下单公司名称）
+     * 用户标识
+     * @return user_id 用户标识
      */
     public Integer getUserId() {
         return userId;
     }
 
     /**
-     * 渠道客户标识（下单公司名称）
-     * @param userId 渠道客户标识（下单公司名称）
+     * 用户标识
+     * @param userId 用户标识
      */
     public void setUserId(Integer userId) {
         this.userId = userId;
@@ -123,18 +134,18 @@ public class MallOrder {
 
     /**
      * 备注留言
-     * @return comment 备注留言
+     * @return remark 备注留言
      */
-    public String getComment() {
-        return comment;
+    public String getRemark() {
+        return remark;
     }
 
     /**
      * 备注留言
-     * @param comment 备注留言
+     * @param remark 备注留言
      */
-    public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
     /**
@@ -157,7 +168,7 @@ public class MallOrder {
      * 订单金额
      * @return order_amount 订单金额
      */
-    public Long getOrderAmount() {
+    public BigDecimal getOrderAmount() {
         return orderAmount;
     }
 
@@ -165,7 +176,7 @@ public class MallOrder {
      * 订单金额
      * @param orderAmount 订单金额
      */
-    public void setOrderAmount(Long orderAmount) {
+    public void setOrderAmount(BigDecimal orderAmount) {
         this.orderAmount = orderAmount;
     }
 
@@ -297,6 +308,38 @@ public class MallOrder {
         this.updateTime = updateTime;
     }
 
+    /**
+     * 商品标识
+     * @return product_id 商品标识
+     */
+    public Integer getProductId() {
+        return productId;
+    }
+
+    /**
+     * 商品标识
+     * @param productId 商品标识
+     */
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
+    /**
+     * 商品数量
+     * @return product_num 商品数量
+     */
+    public Integer getProductNum() {
+        return productNum;
+    }
+
+    /**
+     * 商品数量
+     * @param productNum 商品数量
+     */
+    public void setProductNum(Integer productNum) {
+        this.productNum = productNum;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -306,7 +349,7 @@ public class MallOrder {
         sb.append(", orderId=").append(orderId);
         sb.append(", orderNum=").append(orderNum);
         sb.append(", userId=").append(userId);
-        sb.append(", comment=").append(comment);
+        sb.append(", remark=").append(remark);
         sb.append(", paymentId=").append(paymentId);
         sb.append(", orderAmount=").append(orderAmount);
         sb.append(", sendTime=").append(sendTime);
@@ -317,6 +360,8 @@ public class MallOrder {
         sb.append(", createName=").append(createName);
         sb.append(", addressId=").append(addressId);
         sb.append(", updateTime=").append(updateTime);
+        sb.append(", productId=").append(productId);
+        sb.append(", productNum=").append(productNum);
         sb.append("]");
         return sb.toString();
     }

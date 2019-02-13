@@ -100,7 +100,7 @@ public class AddressCriteria {
     }
 
     /**
-     * address 2019-01-25
+     * address 2019-02-12
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -203,73 +203,63 @@ public class AddressCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdIsNull() {
-            addCriterion("channel_id is null");
+        public Criteria andUserIdIsNull() {
+            addCriterion("user_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdIsNotNull() {
-            addCriterion("channel_id is not null");
+        public Criteria andUserIdIsNotNull() {
+            addCriterion("user_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdEqualTo(String value) {
-            addCriterion("channel_id =", value, "channelId");
+        public Criteria andUserIdEqualTo(Integer value) {
+            addCriterion("user_id =", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdNotEqualTo(String value) {
-            addCriterion("channel_id <>", value, "channelId");
+        public Criteria andUserIdNotEqualTo(Integer value) {
+            addCriterion("user_id <>", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdGreaterThan(String value) {
-            addCriterion("channel_id >", value, "channelId");
+        public Criteria andUserIdGreaterThan(Integer value) {
+            addCriterion("user_id >", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdGreaterThanOrEqualTo(String value) {
-            addCriterion("channel_id >=", value, "channelId");
+        public Criteria andUserIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("user_id >=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdLessThan(String value) {
-            addCriterion("channel_id <", value, "channelId");
+        public Criteria andUserIdLessThan(Integer value) {
+            addCriterion("user_id <", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdLessThanOrEqualTo(String value) {
-            addCriterion("channel_id <=", value, "channelId");
+        public Criteria andUserIdLessThanOrEqualTo(Integer value) {
+            addCriterion("user_id <=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdLike(String value) {
-            addCriterion("channel_id like", value, "channelId");
+        public Criteria andUserIdIn(List<Integer> values) {
+            addCriterion("user_id in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdNotLike(String value) {
-            addCriterion("channel_id not like", value, "channelId");
+        public Criteria andUserIdNotIn(List<Integer> values) {
+            addCriterion("user_id not in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdIn(List<String> values) {
-            addCriterion("channel_id in", values, "channelId");
+        public Criteria andUserIdBetween(Integer value1, Integer value2) {
+            addCriterion("user_id between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdNotIn(List<String> values) {
-            addCriterion("channel_id not in", values, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdBetween(String value1, String value2) {
-            addCriterion("channel_id between", value1, value2, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdNotBetween(String value1, String value2) {
-            addCriterion("channel_id not between", value1, value2, "channelId");
+        public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
 
@@ -340,6 +330,76 @@ public class AddressCriteria {
 
         public Criteria andCityCodeNotBetween(String value1, String value2) {
             addCriterion("city_code not between", value1, value2, "cityCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameIsNull() {
+            addCriterion("city_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameIsNotNull() {
+            addCriterion("city_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameEqualTo(String value) {
+            addCriterion("city_name =", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameNotEqualTo(String value) {
+            addCriterion("city_name <>", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameGreaterThan(String value) {
+            addCriterion("city_name >", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameGreaterThanOrEqualTo(String value) {
+            addCriterion("city_name >=", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameLessThan(String value) {
+            addCriterion("city_name <", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameLessThanOrEqualTo(String value) {
+            addCriterion("city_name <=", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameLike(String value) {
+            addCriterion("city_name like", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameNotLike(String value) {
+            addCriterion("city_name not like", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameIn(List<String> values) {
+            addCriterion("city_name in", values, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameNotIn(List<String> values) {
+            addCriterion("city_name not in", values, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameBetween(String value1, String value2) {
+            addCriterion("city_name between", value1, value2, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameNotBetween(String value1, String value2) {
+            addCriterion("city_name not between", value1, value2, "cityName");
             return (Criteria) this;
         }
 
@@ -673,133 +733,63 @@ public class AddressCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andIsDeaufltIsNull() {
-            addCriterion("is_deauflt is null");
+        public Criteria andIsDefaultIsNull() {
+            addCriterion("is_default is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeaufltIsNotNull() {
-            addCriterion("is_deauflt is not null");
+        public Criteria andIsDefaultIsNotNull() {
+            addCriterion("is_default is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeaufltEqualTo(Boolean value) {
-            addCriterion("is_deauflt =", value, "isDeauflt");
+        public Criteria andIsDefaultEqualTo(Boolean value) {
+            addCriterion("is_default =", value, "isDefault");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeaufltNotEqualTo(Boolean value) {
-            addCriterion("is_deauflt <>", value, "isDeauflt");
+        public Criteria andIsDefaultNotEqualTo(Boolean value) {
+            addCriterion("is_default <>", value, "isDefault");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeaufltGreaterThan(Boolean value) {
-            addCriterion("is_deauflt >", value, "isDeauflt");
+        public Criteria andIsDefaultGreaterThan(Boolean value) {
+            addCriterion("is_default >", value, "isDefault");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeaufltGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("is_deauflt >=", value, "isDeauflt");
+        public Criteria andIsDefaultGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_default >=", value, "isDefault");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeaufltLessThan(Boolean value) {
-            addCriterion("is_deauflt <", value, "isDeauflt");
+        public Criteria andIsDefaultLessThan(Boolean value) {
+            addCriterion("is_default <", value, "isDefault");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeaufltLessThanOrEqualTo(Boolean value) {
-            addCriterion("is_deauflt <=", value, "isDeauflt");
+        public Criteria andIsDefaultLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_default <=", value, "isDefault");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeaufltIn(List<Boolean> values) {
-            addCriterion("is_deauflt in", values, "isDeauflt");
+        public Criteria andIsDefaultIn(List<Boolean> values) {
+            addCriterion("is_default in", values, "isDefault");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeaufltNotIn(List<Boolean> values) {
-            addCriterion("is_deauflt not in", values, "isDeauflt");
+        public Criteria andIsDefaultNotIn(List<Boolean> values) {
+            addCriterion("is_default not in", values, "isDefault");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeaufltBetween(Boolean value1, Boolean value2) {
-            addCriterion("is_deauflt between", value1, value2, "isDeauflt");
+        public Criteria andIsDefaultBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_default between", value1, value2, "isDefault");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeaufltNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("is_deauflt not between", value1, value2, "isDeauflt");
-            return (Criteria) this;
-        }
-
-        public Criteria andCityNameIsNull() {
-            addCriterion("city_name is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCityNameIsNotNull() {
-            addCriterion("city_name is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCityNameEqualTo(String value) {
-            addCriterion("city_name =", value, "cityName");
-            return (Criteria) this;
-        }
-
-        public Criteria andCityNameNotEqualTo(String value) {
-            addCriterion("city_name <>", value, "cityName");
-            return (Criteria) this;
-        }
-
-        public Criteria andCityNameGreaterThan(String value) {
-            addCriterion("city_name >", value, "cityName");
-            return (Criteria) this;
-        }
-
-        public Criteria andCityNameGreaterThanOrEqualTo(String value) {
-            addCriterion("city_name >=", value, "cityName");
-            return (Criteria) this;
-        }
-
-        public Criteria andCityNameLessThan(String value) {
-            addCriterion("city_name <", value, "cityName");
-            return (Criteria) this;
-        }
-
-        public Criteria andCityNameLessThanOrEqualTo(String value) {
-            addCriterion("city_name <=", value, "cityName");
-            return (Criteria) this;
-        }
-
-        public Criteria andCityNameLike(String value) {
-            addCriterion("city_name like", value, "cityName");
-            return (Criteria) this;
-        }
-
-        public Criteria andCityNameNotLike(String value) {
-            addCriterion("city_name not like", value, "cityName");
-            return (Criteria) this;
-        }
-
-        public Criteria andCityNameIn(List<String> values) {
-            addCriterion("city_name in", values, "cityName");
-            return (Criteria) this;
-        }
-
-        public Criteria andCityNameNotIn(List<String> values) {
-            addCriterion("city_name not in", values, "cityName");
-            return (Criteria) this;
-        }
-
-        public Criteria andCityNameBetween(String value1, String value2) {
-            addCriterion("city_name between", value1, value2, "cityName");
-            return (Criteria) this;
-        }
-
-        public Criteria andCityNameNotBetween(String value1, String value2) {
-            addCriterion("city_name not between", value1, value2, "cityName");
+        public Criteria andIsDefaultNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_default not between", value1, value2, "isDefault");
             return (Criteria) this;
         }
 
@@ -872,7 +862,7 @@ public class AddressCriteria {
     }
 
     /**
-     * address 2019-01-25
+     * address 2019-02-12
      */
     public static class Criterion {
         private String condition;
