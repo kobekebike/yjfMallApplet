@@ -120,13 +120,13 @@
                     $("#productAddForm").form("load",obj);
 
                     // 加载商品详情
-                    var productDetail = requestAjaxData("/productController/getProductDetail.do?productId="+data.productId, false, true);
+                    var productDetail = requestAjaxData("/productController/getProductDetail.do?productId="+obj.productId, false, true);
                     ue.ready(function() {//编辑器初始化完成再赋值
                         ue.setContent(productDetail.data);
                     });
                     //加载主图
                     if(data.productFilePath){
-                        $("#Img").attr("src","http://image.jfy.com"+data.productFilePath);
+                        $("#Img").attr("src","http://image.jfy.com"+obj.productFilePath);
                         $("#previewPictureId").show();
                     }
                 }
