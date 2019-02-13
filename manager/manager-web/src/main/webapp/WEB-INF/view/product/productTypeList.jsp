@@ -4,7 +4,7 @@
     <thead>
         <tr>
         	<th data-options="field:'typeId',checkbox:true"></th>
-        	<th data-options="field:'typeName',width:200">分类名称</th>
+        	<th data-options="field:'typeName',width:200,formatter:showProductTypeInfo">分类名称</th>
             <th data-options="field:'sort',width:60">分类排序</th>
             <th data-options="field:'createTime',width:150,formatter:dateTimeFormatter">创建时间</th>
             <th data-options="field:'updateTime',width:150,formatter:dateTimeFormatter">修改时间</th>
@@ -76,4 +76,18 @@
         	});
         }
     }];
+
+    function showProductTypeInfo(value,row){
+        return "<a href='javascript:void(0)' onclick=\"showProductTypeEdit("+JSON.stringify(row).replace(/"/g, '&quot;')+")\" style='color: blue;'>"+value+"</a>";
+    }
+    function showProductTypeEdit(obj){
+        $("#productTypeEditWindow").window({
+            onLoad :function(){
+                //回显数据
+                $("#productTypeEditForm").form("load",obj);
+            }
+        }).window("open");
+        //阻止冒泡
+        event.stopPropagation();
+    }
 </script>
