@@ -1,22 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<table class="easyui-datagrid" id="productList" title="商品列表"
+<table class="easyui-datagrid"  style="width:1000px;height:650px" id="productList" title="商品列表"
        data-options="singleSelect:false,collapsible:true,pagination:true,url:'/productController/getProductList.do',
-                    method:'get',pageSize:20,toolbar:toolbar">
+                    method:'get',pageSize:20,toolbar:toolbar,fitColumns:true">
     <thead>
         <tr>
         	<th data-options="field:'productId',checkbox:true"></th>
-        	<th data-options="field:'productCode',width:60">商品编号</th>
-            <th data-options="field:'productTitle',width:200,formatter:showProductInfo">商品标题</th>
+        	<th data-options="field:'productCode',width:100">商品编号</th>
+            <th data-options="field:'productTitle',formatter:showProductInfo,width:200">商品标题</th>
             <th data-options="field:'productType',width:100">商品类型</th>
             <th data-options="field:'productPrice',width:100">商品价格</th>
-            <th data-options="field:'productSort',width:70">商品排序</th>
+            <th data-options="field:'productStatus',formatter:productStatusFormatter,width:100">商品状态</th>
             <th data-options="field:'createTime',width:150,formatter:dateTimeFormatter">创建时间</th>
             <th data-options="field:'updateTime',width:150,formatter:dateTimeFormatter">修改时间</th>
-            <th data-options="field:'productStatus',width:60,formatter:operation">操作</th>
+            <th data-options="field:'productSort',width:70">商品排序</th>
+            <th data-options="field:'operater',width:100,formatter:operation">操作</th>
         </tr>
     </thead>
 </table>
-<div id="productAddAndEditWindow" class="easyui-window" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:80%;height:80%;padding:10px;"></div>
+<div id="productAddAndEditWindow" class="easyui-window" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:60%;height:60%;padding:10px;"></div>
 <script type="text/javascript">
 
     function getSelectionsProductIds(){
@@ -108,6 +109,13 @@
         function showProductInfo(value,row){
             return "<a href='javascript:void(0)' onclick=\"showProductEdit("+JSON.stringify(row).replace(/"/g, '&quot;')+")\" style='color: blue;'>"+value+"</a>";
         }
+        function productStatusFormatter(value,row){
+            if(value == 1){
+                return "已下架"
+            }else if(value == 2){
+                return "已上架";
+            }
+        }
 
         function showProductEdit(obj){
             $("#productAddAndEditWindow").window({
@@ -137,12 +145,12 @@
 
         function operation(value,row){
             var statusText = "";
-            if(value == 1){
-                statusText = "下架";
-            }else if(value == 2){
-                statusText = "上架";
+            if(row.productStatus == 1){
+                statusText = "上 架";
+            }else if(row.productStatus == 2){
+                statusText = "下 架";
             }
-            return '<input type="button" value="'+statusText+'" onclick="updateProductStatus(\'' + value + "','" + row.productId +'\')"/>';
+            return '<input type="button" value="'+statusText+'" onclick="updateProductStatus(\'' + row.productStatus + "','" + row.productId +'\')"/>';
         }
         function updateProductStatus(status, productId){
             var statusText = "";
