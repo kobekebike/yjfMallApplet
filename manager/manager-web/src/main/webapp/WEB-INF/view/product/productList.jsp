@@ -131,7 +131,7 @@
                     }
                 }
             }).window("open");
-
+            //阻止冒泡
             event.stopPropagation();
         }
 
