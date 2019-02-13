@@ -32,4 +32,14 @@ public class BasicPageController {
 	public String userInfoPage(@PathVariable String pageName){
 		return "userInfo/"+pageName;	//prefix+logicName+suffix
 	}
+
+	/**
+	 * 订单信息通用转向方法
+	 * @param pageName
+	 * @return
+	 */
+	@RequestMapping("order/{pageName}.do")
+	public String orderPage(@PathVariable String pageName){
+		return "order/"+pageName;	//prefix+logicName+suffix
+	}
 }
