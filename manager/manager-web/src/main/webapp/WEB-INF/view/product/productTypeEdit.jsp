@@ -16,15 +16,15 @@
 	    <input type="hidden" name="typeId"/>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton clicking" onclick="submitForm()" id="submitEditProductTypeId">提交</a>
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton clicking" onclick="submitProductTypeEditForm()" id="submitEditProductTypeId">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearProductTypeEditForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
 	$(function(){
 	});
 	
-	function submitForm(){
+	function submitProductTypeEditForm(){
 		//表单校验
 		if(!$('#productTypeAddForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!','error');
@@ -34,14 +34,14 @@
 		var data = ajaxFormSubmitOnce("productTypeEditForm","submitEditProductTypeId",url);
         $.messager.alert("提示",data.message);
 		if(data.code == 0){
-            clearForm();
+            clearProductTypeEditForm();
             $("#submitEditProductTypeId").addClass("clicking");
             $("#productTypeEditWindow").window("close");
             $('#productTypeList').datagrid('reload');
 		}
 	}
 
-	function clearForm(){
-		$('#productTypeAddForm').form('reset');
+	function clearProductTypeEditForm(){
+		$('#productTypeEditForm').form('reset');
 	}
 </script>

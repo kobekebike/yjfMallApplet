@@ -89,7 +89,8 @@ public class ProductService {
         if(productDetailText != null){
             productWithBLOBs.setProductDetail(productDetailText.getBytes());
         }
-        //TODO 商品编号没加,规则待定
+        //商品状态:原始状态为下架(1下架,2上架)
+        productWithBLOBs.setProductStatus(1);
         productWithBLOBs.setCreateId(loginBean.getUserId());
         productWithBLOBs.setCreateName(loginBean.getUserName());
         productWithBLOBs.setCreateTime(new Date());
@@ -204,5 +205,43 @@ public class ProductService {
             productDetail = new String(productWithBLOBs.getProductDetail());
         }
         return Response.createSuccessResult("获取商品详情", productDetail);
+    }
+
+    /**
+     * 根据条件获取商品的集合
+     * @Param productTypeId 商品类型标识
+     * @param page 页数
+     * @param rows 行数
+     * @return
+     */
+    public Response getProductListByCriteria(String productTypeId, int page , int rows){
+        ProductCriteria productCriteria = new ProductCriteria();
+        productCriteria.setLimitStart((page - 1) * rows);
+        productCriteria.setLimitEnd(rows);
+        productCriteria.setOrderByClause("update_time desc");
+        ProductCriteria.Criteria criteria = productCriteria.createCriteria();
+        if(StringUtils.isNotBlank(productTypeId)){
+            criteria.andProductTypeIdEqualTo(Integer.valueOf(productTypeId));
+        }
+        return Response.createSuccessResult("根据条件获取商品列表", productMapper.selectByExample(productCriteria));
+    }
+
+    /**
+     * 修改商品的状态
+     *      上下架
+     * @param status
+     * @param productId
+     * @return
+     */
+    public Response updateProductStatus(Integer status, Integer productId) {
+        ProductWithBLOBs productWithBLOBs = new ProductWithBLOBs();
+        productWithBLOBs.setProductStatus(status);
+        productWithBLOBs.setProductId(productId);
+        productWithBLOBs.setUpdateTime(new Date());
+        if(productMapper.updateByPrimaryKeySelective(productWithBLOBs) == 1){
+            return Response.createSuccessResult("修改成功", null);
+        }else{
+            return Response.createFailResult("修改失败", null);
+        }
     }
 }

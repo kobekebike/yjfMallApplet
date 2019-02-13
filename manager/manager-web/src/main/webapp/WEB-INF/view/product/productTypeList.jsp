@@ -14,7 +14,7 @@
 <div id="productTypeAddWindow" class="easyui-window" title="新增商品" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/product/productTypeAdd.do'" style="width:30%;height:30%;padding:10px;"></div>
 <div id="productTypeEditWindow" class="easyui-window" title="编辑商品" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/product/productTypeEdit.do'" style="width:30%;height:30%;padding:10px;"></div>
 <script>
-    function getSelectionsIds(){
+    function getSelectionsProductTypeIds(){
     	var productTypeList = $("#productTypeList");
     	var sels = productTypeList.datagrid("getSelections");
     	var ids = [];
@@ -35,7 +35,7 @@
         text:'编辑',
         iconCls:'icon-edit',
         handler:function(){
-        	var ids = getSelectionsIds();
+        	var ids = getSelectionsProductTypeIds();
         	if(ids.length == 0){
         		$.messager.alert('提示','必须选择一个类型才能编辑!');
         		return ;
@@ -57,7 +57,7 @@
         text:'删除',
         iconCls:'icon-cancel',
         handler:function(){
-        	var ids = getSelectionsIds();
+        	var ids = getSelectionsProductTypeIds();
         	if(ids.length == 0){
         		$.messager.alert('提示','未选中类型!');
         		return ;

@@ -104,4 +104,38 @@ public class ProductController {
     public Response getProductDetail(HttpServletRequest req, HttpServletResponse res, Integer productId){
         return productService.getProductDetail(productId);
     }
+
+    /**
+     * 根据条件获取商品的集合
+     * @param req
+     * @param res
+     * @param page
+     * @Param rows
+     * @return
+     */
+    @RequestMapping("getProductListByCriteria.do")
+    @ResponseBody
+    public Response getProductListByCriteria(HttpServletRequest req, HttpServletResponse res,
+                                       @RequestParam Integer page, @RequestParam Integer rows){
+        //商品类型标识
+        String productTypeId = req.getParameter("productTypeId");
+        return productService.getProductListByCriteria(
+                productTypeId, page ,rows);
+    }
+
+    /**
+     * 修改商品的状态
+     *      上下架
+     * @param req
+     * @param res
+     * @param status
+     * @param productId
+     * @return
+     */
+    @RequestMapping("updateProductStatus.do")
+    @ResponseBody
+    public Response updateProductStatus(HttpServletRequest req, HttpServletResponse res,
+                                        @RequestParam Integer status, @RequestParam Integer productId){
+        return productService.updateProductStatus(status, productId);
+    }
 }
