@@ -18,13 +18,14 @@
             <span>商品管理</span>
             <ul>
                 <li data-options="attributes:{'url':'/product/productList.do'}">商品列表</li>
-                <li data-options="attributes:{'url':'/product/productTypeList.do'}">类型管理</li>
+                <li data-options="attributes:{'url':'/product/productTypeList.do'}">类型列表</li>
             </ul>
         </li>
         <li>
             <span>用户管理</span>
             <ul>
                 <li data-options="attributes:{'url':'/userInfo/userList.do'}">用户列表</li>
+                <li data-options="attributes:{'url':'/order/mallOrderList.do'}">订单列表</li>
             </ul>
         </li>
     </ul>
