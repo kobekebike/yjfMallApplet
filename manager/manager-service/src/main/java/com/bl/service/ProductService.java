@@ -15,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,35 +56,16 @@ public class ProductService {
                 if(FileUtil.isImageByNameSuffix(file)){
                     return Response.createFailResult("上传的主图不是图片", null);
                 }
-                String random = String.valueOf((int)((Math.random() * 9 + 1) * 100000));
-                String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + random;
-                String filePath = "/upload/mallImage/" + new SimpleDateFormat("yyyy/MM").format(new Date()) + "/" +
-                        fileName + "." + file.getOriginalFilename().split("\\.")[1];
-                File saveDir = new File("E:/workspace/ldhome" + filePath);
-                if (!saveDir.getParentFile().exists()){
-                    saveDir.getParentFile().mkdirs();
-                }
-                FileOutputStream output = null;
-                try {
-                    output = new FileOutputStream(saveDir);
-                    IOUtils.copy(file.getInputStream(),output);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }finally {
-                    try {
-                        if(output != null){
-                            output.close();
-                        }
-                    } catch (IOException e) {
-                    }
-                }
+                String filePath = saveMainImage(file);
                 productWithBLOBs.setProductFilePath(filePath);
             }
         }
         if(productDetailText != null){
-            productWithBLOBs.setProductDetail(productDetailText.getBytes());
+            try {
+                productWithBLOBs.setProductDetail(productDetailText.getBytes("UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         }
         //商品状态:原始状态为下架(1下架,2上架)
         productWithBLOBs.setProductStatus(1);
@@ -103,6 +81,39 @@ public class ProductService {
     }
 
     /**
+     * 保存主图
+     * @param file
+     * @return
+     */
+    private String saveMainImage(MultipartFile file) {
+        String random = String.valueOf((int) ((Math.random() * 9 + 1) * 100000));
+        String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + random;
+        String filePath = "/upload/mallImage/" + new SimpleDateFormat("yyyy/MM").format(new Date()) + "/" +
+                fileName + "." + file.getOriginalFilename().split("\\.")[1];
+        File saveDir = new File("E:/workspace/ldhome" + filePath);
+        if (!saveDir.getParentFile().exists()) {
+            saveDir.getParentFile().mkdirs();
+        }
+        FileOutputStream output = null;
+        try {
+            output = new FileOutputStream(saveDir);
+            IOUtils.copy(file.getInputStream(), output);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (output != null) {
+                    output.close();
+                }
+            } catch (IOException e) {
+            }
+        }
+        return filePath;
+    }
+
+    /**
      * 修改商品
      * @param productWithBLOBs
      * @return
@@ -114,30 +125,7 @@ public class ProductService {
                 if(FileUtil.isImageByNameSuffix(file)){
                     return Response.createFailResult("上传的主图不是图片", null);
                 }
-                String random = String.valueOf((int)((Math.random() * 9 + 1) * 100000));
-                String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + random;
-                String filePath = "/upload/mallImage/" + new SimpleDateFormat("yyyy/MM").format(new Date()) + "/" +
-                        fileName + "." + file.getOriginalFilename().split("\\.")[1];
-                File saveDir = new File("E:/workspace/ldhome" + filePath);
-                if (!saveDir.getParentFile().exists()){
-                    saveDir.getParentFile().mkdirs();
-                }
-                FileOutputStream output = null;
-                try {
-                    output = new FileOutputStream(saveDir);
-                    IOUtils.copy(file.getInputStream(),output);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }finally {
-                    try {
-                        if(output != null){
-                            output.close();
-                        }
-                    } catch (IOException e) {
-                    }
-                }
+                String filePath = saveMainImage(file);
                 //原来有主图时，删除原来的主图，再修改
                 if(StringUtils.isNotBlank(productWithBLOBs.getProductFilePath())){
                     new File("E:/workspace/ldhome" + productWithBLOBs.getProductFilePath()).delete();
@@ -146,7 +134,11 @@ public class ProductService {
             }
         }
         if(productDetailText != null){
-            productWithBLOBs.setProductDetail(productDetailText.getBytes());
+            try {
+                productWithBLOBs.setProductDetail(productDetailText.getBytes("UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         }
         productWithBLOBs.setUpdateTime(new Date());
         if(productMapper.updateByPrimaryKeySelective(productWithBLOBs) == 1){
@@ -202,7 +194,11 @@ public class ProductService {
         productKey.setProductId(productId);
         ProductWithBLOBs productWithBLOBs = productMapper.selectByPrimaryKey(productKey);
         if(productWithBLOBs != null){
-            productDetail = new String(productWithBLOBs.getProductDetail());
+            try {
+                productDetail = new String(productWithBLOBs.getProductDetail(), "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         }
         return Response.createSuccessResult("获取商品详情", productDetail);
     }
