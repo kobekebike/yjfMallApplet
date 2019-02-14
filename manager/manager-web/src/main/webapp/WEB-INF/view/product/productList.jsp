@@ -106,74 +106,74 @@
         }
     }];
 
-        function showProductInfo(value,row){
-            return "<a href='javascript:void(0)' onclick=\"showProductEdit("+JSON.stringify(row).replace(/"/g, '&quot;')+")\" style='color: blue;'>"+value+"</a>";
+    function showProductInfo(value,row){
+        return "<a href='javascript:void(0)' onclick=\"showProductEdit("+JSON.stringify(row).replace(/"/g, '&quot;')+")\" style='color: blue;'>"+value+"</a>";
+    }
+    function productStatusFormatter(value,row){
+        if(value == 1){
+            return "已下架"
+        }else if(value == 2){
+            return "已上架";
         }
-        function productStatusFormatter(value,row){
-            if(value == 1){
-                return "已下架"
-            }else if(value == 2){
-                return "已上架";
+    }
+
+    function showProductEdit(obj){
+        $("#productAddAndEditWindow").window({
+            href:'/product/productAdd.do',
+            title:"编辑商品",
+            onLoad :function(){
+                $("#updateProductId").show();
+                $("#submitProductId").hide();
+                //回显数据
+                $("#productAddForm").form("load",obj);
+
+                // 加载商品详情
+                var productDetail = requestAjaxData("/productController/getProductDetail.do?productId="+obj.productId, false, true);
+                ue.ready(function() {//编辑器初始化完成再赋值
+                    ue.setContent(productDetail.data);
+                });
+                //加载主图
+                if(data.productFilePath){
+                    $("#Img").attr("src","http://image.jfy.com"+obj.productFilePath);
+                    $("#previewPictureId").show();
+                }
             }
+        }).window("open");
+        //阻止冒泡
+        event.stopPropagation();
+    }
+
+    function operation(value,row){
+        var statusText = "";
+        if(row.productStatus == 1){
+            statusText = "上 架";
+        }else if(row.productStatus == 2){
+            statusText = "下 架";
         }
-
-        function showProductEdit(obj){
-            $("#productAddAndEditWindow").window({
-                href:'/product/productAdd.do',
-                title:"编辑商品",
-                onLoad :function(){
-                    $("#updateProductId").show();
-                    $("#submitProductId").hide();
-                    //回显数据
-                    $("#productAddForm").form("load",obj);
-
-                    // 加载商品详情
-                    var productDetail = requestAjaxData("/productController/getProductDetail.do?productId="+obj.productId, false, true);
-                    ue.ready(function() {//编辑器初始化完成再赋值
-                        ue.setContent(productDetail.data);
-                    });
-                    //加载主图
-                    if(data.productFilePath){
-                        $("#Img").attr("src","http://image.jfy.com"+obj.productFilePath);
-                        $("#previewPictureId").show();
+        return '<input type="button" value="'+statusText+'" onclick="updateProductStatus(\'' + row.productStatus + "','" + row.productId +'\')"/>';
+    }
+    function updateProductStatus(status, productId){
+        var statusText = "";
+        var updateStatus = "";
+        if(status == 1){
+            statusText = "上架";
+            updateStatus = 2;
+        }else if(status == 2){
+            statusText = "下架";
+            updateStatus = 1;
+        }
+        $.messager.confirm('确认','确定' + statusText + '该商品吗？',function(r){
+            if (r){
+                var params = {"status":updateStatus,"productId":productId};
+                $.post("/productController/updateProductStatus.do",params, function(data){
+                    if(data.code == 0){
+                        $.messager.alert('提示',statusText + '商品成功!',undefined,function(){
+                            $("#productList").datagrid("reload");
+                        });
                     }
-                }
-            }).window("open");
-            //阻止冒泡
-            event.stopPropagation();
-        }
-
-        function operation(value,row){
-            var statusText = "";
-            if(row.productStatus == 1){
-                statusText = "上 架";
-            }else if(row.productStatus == 2){
-                statusText = "下 架";
+                });
             }
-            return '<input type="button" value="'+statusText+'" onclick="updateProductStatus(\'' + row.productStatus + "','" + row.productId +'\')"/>';
-        }
-        function updateProductStatus(status, productId){
-            var statusText = "";
-            var updateStatus = "";
-            if(status == 1){
-                statusText = "上架";
-                updateStatus = 2;
-            }else if(status == 2){
-                statusText = "下架";
-                updateStatus = 1;
-            }
-            $.messager.confirm('确认','确定' + statusText + '该商品吗？',function(r){
-                if (r){
-                    var params = {"status":updateStatus,"productId":productId};
-                    $.post("/productController/updateProductStatus.do",params, function(data){
-                        if(data.code == 0){
-                            $.messager.alert('提示',statusText + '商品成功!',undefined,function(){
-                                $("#productList").datagrid("reload");
-                            });
-                        }
-                    });
-                }
-            });
-            event.stopPropagation();
-        }
+        });
+        event.stopPropagation();
+    }
 </script>

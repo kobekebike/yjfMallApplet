@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<table class="easyui-datagrid" id="productTypeList" title="商品类型列表"
+<table class="easyui-datagrid" style="width:1000px;height:650px" id="productTypeList" title="商品类型列表"
        data-options="singleSelect:false,collapsible:true,pagination:true,url:'/productTypeController/getProductTypeList.do',method:'get',pageSize:20,toolbar:toolbar">
     <thead>
         <tr>
