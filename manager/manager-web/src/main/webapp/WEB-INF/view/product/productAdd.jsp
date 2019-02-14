@@ -7,28 +7,28 @@
 	    <table border="0" cellpadding="0" cellspacing="1" class="formTable">
 	        <tr>
 	            <td class="labelTd">商品编号:</td>
-	            <td class="inputTd"><input class="easyui-textbox" type="text" name="productCode" data-options="required:true"></input></td>
+	            <td class="inputTd"><input class="easyui-textbox" type="text" name="productCode" data-options="required:true" style="width:80%"/></td>
 	            <td class="labelTd">商品标题:</td>
-	            <td class="inputTd"><input class="easyui-textbox" type="text" name="productTitle" data-options="required:true"></input></td>
+	            <td class="inputTd"><input class="easyui-textbox" type="text" name="productTitle" data-options="required:true" style="width:80%"/></td>
 	        </tr>
 			<tr>
 				<td class="labelTd">商品类型:</td>
 				<td class="inputTd">
-					<input class="easyui-combobox" name="productTypeId" id="productTypeSelectId" data-options="required:true"/>
+					<input class="easyui-combobox" name="productTypeId" id="productTypeSelectId" data-options="required:true" style="width:80%"/>
 				</td>
 	            <td class="labelTd">商品价格:</td>
-	            <td class="inputTd"><input class="easyui-numberbox" type="text" name="productPrice" data-options="min:1,max:99999999,precision:2,required:true" />
+	            <td class="inputTd"><input class="easyui-numberbox" type="text" name="productPrice" data-options="min:1,max:99999999,precision:2,required:true" style="width:80%"/>
 	            	<input type="hidden" name="price"/>
 	            </td>
 			</tr>
 	        <tr>
 	            <td class="labelTd">商品折扣:</td>
-	            <td class="inputTd"><input class="easyui-numberbox" type="text" name="productDiscount" data-options="min:1,max:99999999" />
+	            <td class="inputTd"><input class="easyui-numberbox" type="text" name="productDiscount" data-options="min:1,max:99999999" style="width:80%"/>
 	            	<input type="hidden" name=""/>
 	            </td>
 				<td class="labelTd">商品排序:</td>
 				<td class="inputTd">
-					<input class="easyui-numberbox" type="number" name="productSort" data-options="min:1,max:99999999,required:true"/>
+					<input class="easyui-numberbox" type="number" name="productSort" data-options="min:1,max:99999999,required:true" style="width:80%"/>
 				</td>
 	        </tr>
 	    </table>
@@ -36,7 +36,7 @@
 			<tr>
 				<td class="labelTd">商品主图:</td>
 				<td class="inputTd">
-					<input style="width:300px" name="productFile" id="productFile" class="easyui-filebox" accept="image/*" data-options='onChange:change_photo'>
+					<input style="width:50%" name="productFile" id="productFile" class="easyui-filebox" accept="image/*" data-options='onChange:change_photo'>
 				</td>
 			</tr>
 			<tr id="previewPictureId" style="display: none">
@@ -48,7 +48,7 @@
 			<tr>
 				<td class="labelTd">商品描述:</td>
 				<td class="inputTd">
-					<input class="easyui-textbox" data-options="multiline:true" value="" style="width:50%;height:100px" name="productDescribe">
+					<input class="easyui-textbox" data-options="multiline:true" value="" style="width:100%;height:100px" name="productDescribe">
 				</td>
 			</tr>
 		</table>
@@ -56,7 +56,7 @@
 			<tr>
 				<td class="labelTd">商品详情:</td>
 				<td class="inputTd">
-					<textarea id="editor" type="text/plain" style="width:90%;height:300px;" name="productDetailText"></textarea>
+					<textarea id="editor" type="text/plain" style="width:100%;height:300px;" name="productDetailText"></textarea>
 				</td>
 			</tr>
 		</table>
