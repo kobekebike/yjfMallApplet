@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<table class="easyui-datagrid" id="userInfoList" title="用户列表"
+<table class="easyui-datagrid" style="width:1000px;height:650px" id="userInfoList" title="用户列表"
        data-options="singleSelect:false,collapsible:true,pagination:true,url:'/userInfoController/getUserList.do',method:'get',pageSize:20,toolbar:toolbar">
     <thead>
         <tr>
