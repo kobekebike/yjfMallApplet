@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bl.dao.MallOrderMapperEx" >
+	<resultMap id="BaseResultMap" type="com.bl.pojo.MallOrderVo" >
+		<id column="order_id" property="orderId" jdbcType="INTEGER" />
+		<result column="order_num" property="orderNum" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="order_amount" property="orderAmount" jdbcType="DECIMAL" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="product_num" property="productNum" jdbcType="INTEGER" />
+		<result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+		<result column="product_title" property="productTitle" jdbcType="VARCHAR" />
+		<result column="addressee" property="addressee" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="getMallOrderInfoList" resultMap="BaseResultMap">
+		SELECT
+		mo.order_id,
+		mo.order_num,
+		mo.order_amount,
+		p.product_title,
+		mo.product_num,
+		mo.remark,
+		mo.create_time,
+		mo.order_status,
+		a.addressee
+		FROM mall_order mo JOIN product p ON mo.product_id=p.product_id
+		JOIN address a ON mo.address_id=a.address_id
+		ORDER BY mo.create_time
+		LIMIT #{limitStart} , #{limitEnd}
+	</select>
+
+</mapper>

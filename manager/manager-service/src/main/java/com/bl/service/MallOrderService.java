@@ -3,8 +3,10 @@ package com.bl.service;
 import com.bl.base.EasyUIResult;
 import com.bl.base.Response;
 import com.bl.dao.MallOrderMapper;
+import com.bl.dao.MallOrderMapperEx;
 import com.bl.model.MallOrder;
 import com.bl.model.MallOrderCriteria;
+import com.bl.pojo.MallOrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ public class MallOrderService {
 
     @Autowired
     private MallOrderMapper mallOrderMapper;
+    @Autowired
+    private MallOrderMapperEx mallOrderMapperEx;
 
     /**
      * 根据用户标识与订单状态获取订单集合
@@ -33,11 +37,7 @@ public class MallOrderService {
     }
 
     public EasyUIResult getMallOrderList(Integer page, Integer rows) {
-        MallOrderCriteria mallOrderCriteria = new MallOrderCriteria();
-        mallOrderCriteria.setLimitStart((page - 1) * rows);
-        mallOrderCriteria.setLimitEnd(rows);
-        mallOrderCriteria.setOrderByClause("update_time desc");
-        List<MallOrder> list = mallOrderMapper.selectByExample(mallOrderCriteria);
+        List<MallOrderVo> list = mallOrderMapperEx.getMallOrderInfoList((page - 1) * rows, rows);
         return new EasyUIResult(list.size(), list);
     }
 }
