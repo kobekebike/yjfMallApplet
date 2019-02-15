@@ -6,6 +6,7 @@
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="city_code" property="cityCode" jdbcType="VARCHAR" />
     <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="addressee" property="addressee" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="detail_address" property="detailAddress" jdbcType="VARCHAR" />
     <result column="create_name" property="createName" jdbcType="VARCHAR" />
@@ -73,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    address_id, user_id, city_code, city_name, phone, detail_address, create_name, create_id, 
-    create_time, is_default, update_time
+    address_id, user_id, city_code, city_name, addressee, phone, detail_address, create_name, 
+    create_id, create_time, is_default, update_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bl.model.AddressCriteria" >
     select
@@ -111,13 +112,15 @@
   </delete>
   <insert id="insert" parameterType="com.bl.model.Address" useGeneratedKeys="true" keyProperty="addressId" >
     insert into address (address_id, user_id, city_code, 
-      city_name, phone, detail_address, 
-      create_name, create_id, create_time, 
-      is_default, update_time)
+      city_name, addressee, phone, 
+      detail_address, create_name, create_id, 
+      create_time, is_default, update_time
+      )
     values (#{addressId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{cityCode,jdbcType=VARCHAR}, 
-      #{cityName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{detailAddress,jdbcType=VARCHAR}, 
-      #{createName,jdbcType=VARCHAR}, #{createId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{isDefault,jdbcType=BIT}, #{updateTime,jdbcType=TIMESTAMP})
+      #{cityName,jdbcType=VARCHAR}, #{addressee,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{detailAddress,jdbcType=VARCHAR}, #{createName,jdbcType=VARCHAR}, #{createId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{isDefault,jdbcType=BIT}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.bl.model.Address" useGeneratedKeys="true" keyProperty="addressId" >
     insert into address
@@ -133,6 +136,9 @@
       </if>
       <if test="cityName != null" >
         city_name,
+      </if>
+      <if test="addressee != null" >
+        addressee,
       </if>
       <if test="phone != null" >
         phone,
@@ -168,6 +174,9 @@
       </if>
       <if test="cityName != null" >
         #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="addressee != null" >
+        #{addressee,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
         #{phone,jdbcType=VARCHAR},
@@ -213,6 +222,9 @@
       <if test="record.cityName != null" >
         city_name = #{record.cityName,jdbcType=VARCHAR},
       </if>
+      <if test="record.addressee != null" >
+        addressee = #{record.addressee,jdbcType=VARCHAR},
+      </if>
       <if test="record.phone != null" >
         phone = #{record.phone,jdbcType=VARCHAR},
       </if>
@@ -245,6 +257,7 @@
       user_id = #{record.userId,jdbcType=INTEGER},
       city_code = #{record.cityCode,jdbcType=VARCHAR},
       city_name = #{record.cityName,jdbcType=VARCHAR},
+      addressee = #{record.addressee,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       detail_address = #{record.detailAddress,jdbcType=VARCHAR},
       create_name = #{record.createName,jdbcType=VARCHAR},
@@ -267,6 +280,9 @@
       </if>
       <if test="cityName != null" >
         city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="addressee != null" >
+        addressee = #{addressee,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
         phone = #{phone,jdbcType=VARCHAR},
@@ -297,6 +313,7 @@
     set user_id = #{userId,jdbcType=INTEGER},
       city_code = #{cityCode,jdbcType=VARCHAR},
       city_name = #{cityName,jdbcType=VARCHAR},
+      addressee = #{addressee,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       detail_address = #{detailAddress,jdbcType=VARCHAR},
       create_name = #{createName,jdbcType=VARCHAR},

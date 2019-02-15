@@ -24,6 +24,11 @@ public class Address {
     private String cityName;
 
     /**
+     * 收件人
+     */
+    private String addressee;
+
+    /**
      * 联系电话
      */
     private String phone;
@@ -120,6 +125,22 @@ public class Address {
      */
     public void setCityName(String cityName) {
         this.cityName = cityName == null ? null : cityName.trim();
+    }
+
+    /**
+     * 收件人
+     * @return addressee 收件人
+     */
+    public String getAddressee() {
+        return addressee;
+    }
+
+    /**
+     * 收件人
+     * @param addressee 收件人
+     */
+    public void setAddressee(String addressee) {
+        this.addressee = addressee == null ? null : addressee.trim();
     }
 
     /**
@@ -244,6 +265,7 @@ public class Address {
         sb.append(", userId=").append(userId);
         sb.append(", cityCode=").append(cityCode);
         sb.append(", cityName=").append(cityName);
+        sb.append(", addressee=").append(addressee);
         sb.append(", phone=").append(phone);
         sb.append(", detailAddress=").append(detailAddress);
         sb.append(", createName=").append(createName);

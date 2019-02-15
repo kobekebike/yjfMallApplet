@@ -100,7 +100,7 @@ public class AddressCriteria {
     }
 
     /**
-     * address 2019-02-12
+     * address 2019-02-15
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -400,6 +400,76 @@ public class AddressCriteria {
 
         public Criteria andCityNameNotBetween(String value1, String value2) {
             addCriterion("city_name not between", value1, value2, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddresseeIsNull() {
+            addCriterion("addressee is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddresseeIsNotNull() {
+            addCriterion("addressee is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddresseeEqualTo(String value) {
+            addCriterion("addressee =", value, "addressee");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddresseeNotEqualTo(String value) {
+            addCriterion("addressee <>", value, "addressee");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddresseeGreaterThan(String value) {
+            addCriterion("addressee >", value, "addressee");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddresseeGreaterThanOrEqualTo(String value) {
+            addCriterion("addressee >=", value, "addressee");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddresseeLessThan(String value) {
+            addCriterion("addressee <", value, "addressee");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddresseeLessThanOrEqualTo(String value) {
+            addCriterion("addressee <=", value, "addressee");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddresseeLike(String value) {
+            addCriterion("addressee like", value, "addressee");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddresseeNotLike(String value) {
+            addCriterion("addressee not like", value, "addressee");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddresseeIn(List<String> values) {
+            addCriterion("addressee in", values, "addressee");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddresseeNotIn(List<String> values) {
+            addCriterion("addressee not in", values, "addressee");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddresseeBetween(String value1, String value2) {
+            addCriterion("addressee between", value1, value2, "addressee");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddresseeNotBetween(String value1, String value2) {
+            addCriterion("addressee not between", value1, value2, "addressee");
             return (Criteria) this;
         }
 
@@ -862,7 +932,7 @@ public class AddressCriteria {
     }
 
     /**
-     * address 2019-02-12
+     * address 2019-02-15
      */
     public static class Criterion {
         private String condition;
