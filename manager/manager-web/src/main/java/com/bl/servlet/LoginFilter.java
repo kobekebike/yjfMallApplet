@@ -21,7 +21,7 @@ public class LoginFilter extends OncePerRequestFilter {
 		LoginBean lb = (LoginBean) arg0.getSession().getAttribute(LoginBean.UserLoginKey);
 
 		String queryString1 = arg0.getQueryString();
-		if (queryString1 != null && (queryString1.contains("doLogin"))) {
+		if (queryString1 != null && ((queryString1.contains("doLogin")) || (queryString1.contains("doWx")))) {
 			arg2.doFilter(arg0, arg1);
 			return;
 		}
