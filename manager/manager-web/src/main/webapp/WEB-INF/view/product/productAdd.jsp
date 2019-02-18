@@ -145,10 +145,10 @@
         $.messager.alert("提示",data.message);
         if(data.code == 0){
             clearProductForm();
-            $("#submitProductId").addClass("clicking")
             $("#productAddAndEditWindow").window("close");
             $('#productList').datagrid('reload');
         }
+		$("#submitProductId").addClass("clicking");
 	}
 	
 	function clearProductForm(){

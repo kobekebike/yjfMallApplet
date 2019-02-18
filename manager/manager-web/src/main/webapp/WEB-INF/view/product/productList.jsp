@@ -133,7 +133,7 @@
                     ue.setContent(productDetail.data);
                 });
                 //加载主图
-                if(data.productFilePath){
+                if(obj.productFilePath){
                     $("#Img").attr("src","http://image.jfy.com"+obj.productFilePath);
                     $("#previewPictureId").show();
                 }
