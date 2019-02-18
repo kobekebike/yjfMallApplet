@@ -60,7 +60,12 @@ public class ProductController {
     public Response saveProduct(HttpServletRequest req, HttpServletResponse res,
                                 ProductWithBLOBs productWithBLOBs, @RequestParam(value = "productFile", required = false) MultipartFile file,
                                 @RequestParam(value = "productDetailText", required = false) String productDetailText){
-        return productService.saveProduct(productWithBLOBs, BasicUtils.getLoginInfo(req), file, productDetailText);
+        try {
+            return productService.saveProduct(productWithBLOBs, BasicUtils.getLoginInfo(req), file, productDetailText);
+        }catch (Exception e){
+            log.error(e.getMessage(), e);
+        }
+        return Response.createFailResult("保存失败", null);
     }
 
     /**
@@ -109,18 +114,15 @@ public class ProductController {
      * 根据条件获取商品的集合
      * @param req
      * @param res
-     * @param page
-     * @Param rows
      * @return
      */
     @RequestMapping("getProductListByCriteria.do")
     @ResponseBody
-    public Response getProductListByCriteria(HttpServletRequest req, HttpServletResponse res,
-                                       @RequestParam Integer page, @RequestParam Integer rows){
+    public Response getProductListByCriteria(HttpServletRequest req, HttpServletResponse res){
         //商品类型标识
-        String productTypeId = req.getParameter("productTypeId");
+        String searchText = req.getParameter("searchText");
         return productService.getProductListByCriteria(
-                productTypeId, page ,rows);
+                searchText);
     }
 
     /**

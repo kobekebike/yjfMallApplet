@@ -49,7 +49,7 @@ public class ProductService {
      * @param productDetailText
      * @return
      */
-    public Response saveProduct(ProductWithBLOBs productWithBLOBs, LoginBean loginBean, MultipartFile file, String productDetailText) {
+    public Response saveProduct(ProductWithBLOBs productWithBLOBs, LoginBean loginBean, MultipartFile file, String productDetailText) throws Exception{
         if(file != null){
             // 判断文件是否为空
             if (!file.isEmpty()) {
@@ -205,19 +205,21 @@ public class ProductService {
 
     /**
      * 根据条件获取商品的集合
-     * @Param productTypeId 商品类型标识
-     * @param page 页数
-     * @param rows 行数
+     * @Param searchText 搜索内容
      * @return
      */
-    public Response getProductListByCriteria(String productTypeId, int page , int rows){
+    public Response getProductListByCriteria(String searchText){
         ProductCriteria productCriteria = new ProductCriteria();
-        productCriteria.setLimitStart((page - 1) * rows);
-        productCriteria.setLimitEnd(rows);
-        productCriteria.setOrderByClause("update_time desc");
-        ProductCriteria.Criteria criteria = productCriteria.createCriteria();
-        if(StringUtils.isNotBlank(productTypeId)){
-            criteria.andProductTypeIdEqualTo(Integer.valueOf(productTypeId));
+        productCriteria.setOrderByClause("product_sort");
+        if(StringUtils.isNotBlank(searchText)){
+            productCriteria.createCriteria()
+                    .andProductTitleLike("%"+searchText+"%").andProductStatusEqualTo(2);
+            ProductCriteria.Criteria criteria = productCriteria.createCriteria();
+            criteria.andProductStatusEqualTo(2);
+                criteria.andProductCodeLike("%"+searchText+"%");
+            productCriteria.or(criteria);
+        }else{
+            productCriteria.createCriteria().andProductStatusEqualTo(2);
         }
         return Response.createSuccessResult("根据条件获取商品列表", productMapper.selectByExample(productCriteria));
     }
