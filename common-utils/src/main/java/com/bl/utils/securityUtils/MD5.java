@@ -1,7 +1,6 @@
-package com.bl.utils;
+package com.bl.utils.securityUtils;
 
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 /*
  * MD5 算法
