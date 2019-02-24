@@ -19,11 +19,16 @@ public class AddressService {
     /**
      * 根据用户标识获取地址集合
      * @param userId    用户标识
+     * @param isDefault     是否是默认地址
      * @return
      */
-    public Response getAddressListByUserId(Integer userId) {
+    public Response getAddressListByUserId(Integer userId, boolean isDefault) {
         AddressCriteria addressCriteria = new AddressCriteria();
-        addressCriteria.createCriteria().andUserIdEqualTo(userId);
+        AddressCriteria.Criteria criteria = addressCriteria.createCriteria();
+        criteria.andUserIdEqualTo(userId);
+        if(isDefault){
+            criteria.andIsDefaultEqualTo(isDefault);
+        }
         return Response.createSuccessResult("根据用户标识获取地址集合", addressMapper.selectByExample(addressCriteria));
     }
 
@@ -32,11 +37,17 @@ public class AddressService {
      * @param address
      * @return
      */
-    public Response saveProductType(Address address) {
+    public Response saveAddress(Address address) {
         //当保存的地址信息是默认地址时,判断该用户的其他地址是否存在默认地址,存在则将其修改为不是默认地址
-        if(address.getIsDefault()){
-            updateAndJudgeIsDefault(address.getUserId());
-        }
+//        if(address.getIsDefault()){
+//            updateAndJudgeIsDefault(address.getUserId());
+//        }
+        //暂时只保存一条地址/////////////////////////////////
+        AddressCriteria addressCriteria = new AddressCriteria();
+        addressCriteria.createCriteria().andUserIdEqualTo(address.getUserId());
+        addressMapper.deleteByExample(addressCriteria);
+        //////////////////////////////////////////////////
+
         address.setCreateTime(new Date());
         address.setUpdateTime(new Date());
         if(addressMapper.insertSelective(address) == 1){
@@ -71,9 +82,9 @@ public class AddressService {
      */
     public Response updateDefaultAddress(Address address){
         //当保存的地址信息是默认地址时,判断该用户的其他地址是否存在默认地址,存在则将其修改为不是默认地址
-        if(address.getIsDefault()){
-            updateAndJudgeIsDefault(address.getUserId());
-        }
+//        if(address.getIsDefault()){
+//            updateAndJudgeIsDefault(address.getUserId());
+//        }
         address.setUpdateTime(new Date());
         if(addressMapper.updateByPrimaryKeySelective(address) == 1){
             return Response.createSuccessResult("修改成功", null);
