@@ -24,16 +24,19 @@ public class AddressController {
 
     /**
      * 根据用户标识获取地址集合
+     *      传入第二个字段,获取默认的地址
      * @param req
      * @param res
      * @param userId    用户标识
+     * @param isDefault     是否是默认地址
      * @return
      */
     @RequestMapping("getAddressListByUserId.do")
     @ResponseBody
     public Response getAddressListByUserId(HttpServletRequest req, HttpServletResponse res,
-                                                   @RequestParam(value = "userId", defaultValue = "0") Integer userId){
-        return addressService.getAddressListByUserId(userId);
+                                                   @RequestParam(value = "userId", defaultValue = "0") Integer userId,
+                                           @RequestParam(value = "isDefault", defaultValue = "false", required = false) boolean isDefault){
+        return addressService.getAddressListByUserId(userId, isDefault);
     }
 
     /**
@@ -47,7 +50,7 @@ public class AddressController {
     @ResponseBody
     public Response saveAddress(HttpServletRequest req, HttpServletResponse res,
                                     Address address){
-        return addressService.saveProductType(address);
+        return addressService.saveAddress(address);
     }
 
     /**

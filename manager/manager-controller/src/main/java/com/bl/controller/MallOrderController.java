@@ -2,6 +2,8 @@ package com.bl.controller;
 
 import com.bl.base.EasyUIResult;
 import com.bl.base.Response;
+import com.bl.model.MallOrder;
+import com.bl.model.ProductType;
 import com.bl.service.MallOrderService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -34,7 +36,7 @@ public class MallOrderController {
     @ResponseBody
     public Response getOrderByUserIdAndOrderStatus(HttpServletRequest req, HttpServletResponse res,
                                                    @RequestParam(value = "userId", defaultValue = "0") Integer userId,
-                                                   @RequestParam(value = "orderStatus", defaultValue = "0", required = false) Integer orderStatus){
+                                                   @RequestParam(value = "orderStatus", required = false) String[] orderStatus){
         return mallOrderService.getOrderByUserIdAndOrderStatus(userId, orderStatus);
     }
 
@@ -51,5 +53,47 @@ public class MallOrderController {
     public EasyUIResult getMallOrderList(HttpServletRequest req, HttpServletResponse res,
                                        @RequestParam Integer page, @RequestParam Integer rows){
         return mallOrderService.getMallOrderList(page, rows);
+    }
+
+    /**
+     * 保存订单
+     * @param req
+     * @param res
+     * @param mallOrder 对象
+     * @return
+     */
+    @RequestMapping("saveMallOrder.do")
+    @ResponseBody
+    public Response saveMallOrder(HttpServletRequest req, HttpServletResponse res,
+                                    MallOrder mallOrder){
+        return mallOrderService.saveMallOrder(mallOrder);
+    }
+
+    /**
+     * 修改订单表的商品数量
+     * @param req
+     * @param res
+     * @param mallOrder
+     * @return
+     */
+    @RequestMapping("updateOrderNum.do")
+    @ResponseBody
+    public Response updateOrderNum(HttpServletRequest req, HttpServletResponse res,
+                                   MallOrder mallOrder){
+        return mallOrderService.updateOrderNum(mallOrder);
+    }
+
+    /**
+     * 根据订单标识删除订单
+     * @param req
+     * @param res
+     * @param orderId
+     * @return
+     */
+    @RequestMapping("deleteMallOrderByOrderId.do")
+    @ResponseBody
+    public Response deleteMallOrderByOrderId(HttpServletRequest req, HttpServletResponse res,
+                                    @RequestParam Integer orderId){
+        return mallOrderService.deleteMallOrderByOrderId(orderId);
     }
 }
