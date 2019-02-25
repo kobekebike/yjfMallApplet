@@ -38,22 +38,6 @@
 		</property>
 	</bean>
 
-	<!-- spring缓存 -->
-	<cache:annotation-driven cache-manager="cacheManager"/>
-	
-	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">  
-    <property name="caches">  
-        <set>  
-           <bean  
-                class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"  
-                p:name="default" />  
-            <bean  
-                class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"  
-                p:name="andCache" />  
-        </set>  
-    </property>  
-</bean> 
-	
 	<bean id="sessionInterceptor" class="com.bl.interceptor.SessionInterceptor"/>
 	
 	<!-- 定义了这个，controller下类只要定义@Controller，或方法前只定义@RequestMapping就行了，当然想不用默认的也可以 -->
