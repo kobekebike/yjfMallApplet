@@ -13,6 +13,25 @@
 		<result column="addressee" property="addressee" jdbcType="VARCHAR" />
 	</resultMap>
 
+	<resultMap id="WXBaseResultMap" type="com.bl.pojo.MallOrderWXVo" >
+		<id column="order_id" property="orderId" jdbcType="INTEGER" />
+		<result column="order_num" property="orderNum" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="order_amount" property="orderAmount" jdbcType="DECIMAL" />
+		<result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+		<result column="product_id" property="productId" jdbcType="INTEGER" />
+		<result column="product_num" property="productNum" jdbcType="INTEGER" />
+		<result column="product_describe" property="productDescribe" jdbcType="VARCHAR" />
+		<result column="product_price" property="productPrice" jdbcType="DECIMAL" />
+		<result column="product_status" property="productStatus" jdbcType="INTEGER" />
+		<result column="product_type" property="productType" jdbcType="VARCHAR" />
+		<result column="product_discount" property="productDiscount" jdbcType="INTEGER" />
+		<result column="product_title" property="productTitle" jdbcType="VARCHAR" />
+		<result column="product_file_path" property="productFilePath" jdbcType="VARCHAR" />
+		<result column="product_code" property="productCode" jdbcType="VARCHAR" />
+		<result column="selected" property="selected" jdbcType="VARCHAR" />
+	</resultMap>
+
 	<select id="getMallOrderInfoList" resultMap="BaseResultMap">
 		SELECT
 		mo.order_id,
@@ -25,9 +44,37 @@
 		mo.order_status,
 		a.addressee
 		FROM mall_order mo JOIN product p ON mo.product_id=p.product_id
-		JOIN address a ON mo.address_id=a.address_id
+		LEFT JOIN address a ON mo.address_id=a.address_id
 		ORDER BY mo.create_time
 		LIMIT #{limitStart} , #{limitEnd}
 	</select>
 
+	<select id="getWXOrderListByUserIdAndOrderStatus" resultMap="WXBaseResultMap">
+		SELECT
+		mo.order_id,
+		mo.order_num,
+		mo.remark,
+		mo.order_amount,
+		mo.order_status,
+		mo.product_id,
+		mo.product_num,
+		p.product_describe,
+		p.product_price,
+		p.product_status,
+		p.product_type,
+		p.product_discount,
+		p.product_title,
+		p.product_file_path,
+		p.product_code,
+		"true" AS selected
+		FROM mall_order mo JOIN product p ON mo.product_id=p.product_id
+		WHERE mo.user_id=#{userId}
+		<if test="orderStatusList != null">
+			AND mo.order_status IN
+			<foreach collection="orderStatusList" index="index" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		ORDER BY mo.create_time
+	</select>
 </mapper>
