@@ -39,14 +39,9 @@ public class AddressService {
      */
     public Response saveAddress(Address address) {
         //当保存的地址信息是默认地址时,判断该用户的其他地址是否存在默认地址,存在则将其修改为不是默认地址
-//        if(address.getIsDefault()){
-//            updateAndJudgeIsDefault(address.getUserId());
-//        }
-        //暂时只保存一条地址/////////////////////////////////
-        AddressCriteria addressCriteria = new AddressCriteria();
-        addressCriteria.createCriteria().andUserIdEqualTo(address.getUserId());
-        addressMapper.deleteByExample(addressCriteria);
-        //////////////////////////////////////////////////
+        if(address.getIsDefault()){
+            updateAndJudgeIsDefault(address.getUserId());
+        }
 
         address.setCreateTime(new Date());
         address.setUpdateTime(new Date());
@@ -82,14 +77,22 @@ public class AddressService {
      */
     public Response updateDefaultAddress(Address address){
         //当保存的地址信息是默认地址时,判断该用户的其他地址是否存在默认地址,存在则将其修改为不是默认地址
-//        if(address.getIsDefault()){
-//            updateAndJudgeIsDefault(address.getUserId());
-//        }
+        if(address.getIsDefault()){
+            updateAndJudgeIsDefault(address.getUserId());
+        }
         address.setUpdateTime(new Date());
         if(addressMapper.updateByPrimaryKeySelective(address) == 1){
             return Response.createSuccessResult("修改成功", null);
         }else{
             return Response.createFailResult("修改失败", null);
+        }
+    }
+
+    public Response deleteAddress(Integer addressId) {
+        if(addressMapper.deleteByPrimaryKey(addressId) == 1){
+            return Response.createSuccessResult("删除成功", null);
+        }else{
+            return Response.createFailResult("删除失败", null);
         }
     }
 }

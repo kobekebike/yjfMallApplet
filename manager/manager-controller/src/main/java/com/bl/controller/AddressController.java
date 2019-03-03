@@ -66,4 +66,17 @@ public class AddressController {
                                          Address address){
         return addressService.updateDefaultAddress(address);
     }
+
+    /**
+     * 删除地址
+     * @param req
+     * @param res
+     * @param addressId
+     * @return
+     */
+    @RequestMapping("deleteAddress.do")
+    @ResponseBody
+    public Response deleteAddress(HttpServletRequest req, HttpServletResponse res,Integer addressId){
+        return addressService.deleteAddress(addressId);
+    }
 }
