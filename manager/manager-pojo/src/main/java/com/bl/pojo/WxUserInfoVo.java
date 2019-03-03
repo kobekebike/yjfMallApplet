@@ -21,6 +21,11 @@ public class WxUserInfoVo {
      */
     private String signature;
 
+    /**
+     * 用户登录凭证，用于换取openid和session_key等信息
+     */
+    private String loginCode;
+
     public String getEncryptedData() {
         return encryptedData;
     }
@@ -53,6 +58,14 @@ public class WxUserInfoVo {
         this.signature = signature;
     }
 
+    public String getLoginCode() {
+        return loginCode;
+    }
+
+    public void setLoginCode(String loginCode) {
+        this.loginCode = loginCode;
+    }
+
     @Override
     public String toString() {
         return "WxUserInfoVo{" +
@@ -60,6 +73,7 @@ public class WxUserInfoVo {
                 ", iv='" + iv + '\'' +
                 ", rawData='" + rawData + '\'' +
                 ", signature='" + signature + '\'' +
+                ", loginCode='" + loginCode + '\'' +
                 '}';
     }
 }
