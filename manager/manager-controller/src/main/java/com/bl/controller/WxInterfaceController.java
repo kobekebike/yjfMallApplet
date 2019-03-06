@@ -1,11 +1,14 @@
 package com.bl.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.bl.base.Response;
 import com.bl.pojo.WxUserInfoVo;
+import com.bl.service.UserInfoService;
 import com.bl.utils.PropertiesUtil;
 import com.bl.utils.httpUtils.RequestServiceImpl;
 import com.bl.utils.securityUtils.SHA1;
 import com.bl.utils.securityUtils.WXCore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,25 +23,32 @@ import java.util.Map;
 @RequestMapping("wxInterfaceController")
 public class WxInterfaceController {
 
+    @Autowired
+    private UserInfoService userInfoService;
+
     /**
      * 微信小程序登录时，获取code，调用code2Session请求，获取session_key密钥
+     *      openid  用户唯一标识
+     *      session_key     会话密钥
+     *      unionid     用户在开放平台的唯一标识符，在满足 UnionID 下发条件的情况下会返回
      * @param req
      * @param res
      * @param code
      */
     @RequestMapping("getWxLoginInfo.do")
     @ResponseBody
-    public void getWxLoginInfo(HttpServletRequest req, HttpServletResponse res,
-                               @RequestParam(value = "code", required = true)String code){
+    public Response getWxLoginInfo(HttpServletRequest req, HttpServletResponse res,
+                                   @RequestParam(value = "code", required = true)String code){
         try {
             Map<String, Object> wxSessionMap = JSON.parseObject(new RequestServiceImpl().get("https://api.weixin.qq.com/sns/jscode2session?grant_type=authorization_code&appid="
                     + PropertiesUtil.getAppId() + "&secret=" + PropertiesUtil.getSecret() + "&js_code="+code, null), Map.class);
-            System.err.println(wxSessionMap.get("openid"));
+            return userInfoService.saveOrUpdateUserInfo((String)wxSessionMap.get("openid"));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return Response.createFailResult("访问失败", null);
     }
 
     /**
