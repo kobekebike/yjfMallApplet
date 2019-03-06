@@ -3,14 +3,16 @@
 <mapper namespace="com.bl.dao.UserInfoMapper" >
   <resultMap id="BaseResultMap" type="com.bl.model.UserInfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="user_name" property="userName" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="create_name" property="createName" jdbcType="VARCHAR" />
     <result column="create_id" property="createId" jdbcType="INTEGER" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="wechat" property="wechat" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="visit_time" property="visitTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_name, phone, create_name, create_id, create_time, password, wechat, update_time
+    id, user_name, phone, create_name, create_id, password, wechat, open_id, create_time, 
+    update_time, visit_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bl.model.UserInfoCriteria" >
     select
@@ -108,13 +111,13 @@
   </delete>
   <insert id="insert" parameterType="com.bl.model.UserInfo" useGeneratedKeys="true" keyProperty="id" >
     insert into user_info (id, user_name, phone, 
-      create_name, create_id, create_time, 
-      password, wechat, update_time
-      )
-    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
-      #{createName,jdbcType=VARCHAR}, #{createId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{password,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      create_name, create_id, password, 
+      wechat, open_id, create_time, 
+      update_time, visit_time)
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{createName,jdbcType=VARCHAR}, #{createId,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, 
+      #{wechat,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{visitTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.bl.model.UserInfo" useGeneratedKeys="true" keyProperty="id" >
     insert into user_info
@@ -134,17 +137,23 @@
       <if test="createId != null" >
         create_id,
       </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
       <if test="password != null" >
         password,
       </if>
       <if test="wechat != null" >
         wechat,
       </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
       <if test="updateTime != null" >
         update_time,
+      </if>
+      <if test="visitTime != null" >
+        visit_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -152,7 +161,7 @@
         #{id,jdbcType=INTEGER},
       </if>
       <if test="userName != null" >
-        #{userName,jdbcType=INTEGER},
+        #{userName,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
         #{phone,jdbcType=VARCHAR},
@@ -163,17 +172,23 @@
       <if test="createId != null" >
         #{createId,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
       <if test="wechat != null" >
         #{wechat,jdbcType=VARCHAR},
       </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitTime != null" >
+        #{visitTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -190,7 +205,7 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.userName != null" >
-        user_name = #{record.userName,jdbcType=INTEGER},
+        user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
       <if test="record.phone != null" >
         phone = #{record.phone,jdbcType=VARCHAR},
@@ -201,17 +216,23 @@
       <if test="record.createId != null" >
         create_id = #{record.createId,jdbcType=INTEGER},
       </if>
-      <if test="record.createTime != null" >
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
       </if>
       <if test="record.wechat != null" >
         wechat = #{record.wechat,jdbcType=VARCHAR},
       </if>
+      <if test="record.openId != null" >
+        open_id = #{record.openId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.updateTime != null" >
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.visitTime != null" >
+        visit_time = #{record.visitTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -221,14 +242,16 @@
   <update id="updateByExample" parameterType="map" >
     update user_info
     set id = #{record.id,jdbcType=INTEGER},
-      user_name = #{record.userName,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       create_name = #{record.createName,jdbcType=VARCHAR},
       create_id = #{record.createId,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       password = #{record.password,jdbcType=VARCHAR},
       wechat = #{record.wechat,jdbcType=VARCHAR},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+      open_id = #{record.openId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      visit_time = #{record.visitTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -237,7 +260,7 @@
     update user_info
     <set >
       <if test="userName != null" >
-        user_name = #{userName,jdbcType=INTEGER},
+        user_name = #{userName,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
         phone = #{phone,jdbcType=VARCHAR},
@@ -248,31 +271,39 @@
       <if test="createId != null" >
         create_id = #{createId,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
       <if test="wechat != null" >
         wechat = #{wechat,jdbcType=VARCHAR},
       </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitTime != null" >
+        visit_time = #{visitTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bl.model.UserInfo" >
     update user_info
-    set user_name = #{userName,jdbcType=INTEGER},
+    set user_name = #{userName,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       create_name = #{createName,jdbcType=VARCHAR},
       create_id = #{createId,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
       password = #{password,jdbcType=VARCHAR},
       wechat = #{wechat,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      open_id = #{openId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      visit_time = #{visitTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

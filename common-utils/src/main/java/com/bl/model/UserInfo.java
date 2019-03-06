@@ -9,12 +9,12 @@ public class UserInfo {
     private Integer id;
 
     /**
-     * 渠道公司标识（最新下单公司）
+     * 用户名称
      */
-    private Integer userName;
+    private String userName;
 
     /**
-     * 联系电话（暂时不用）
+     * 联系电话
      */
     private String phone;
 
@@ -29,12 +29,7 @@ public class UserInfo {
     private Integer createId;
 
     /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 用户密码
+     * 用户密码（后台用户需要）
      */
     private String password;
 
@@ -44,9 +39,24 @@ public class UserInfo {
     private String wechat;
 
     /**
+     * 微信公众号用唯一标识
+     */
+    private String openId;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
      * 修改时间
      */
     private Date updateTime;
+
+    /**
+     * 访问时间
+     */
+    private Date visitTime;
 
     /**
      * 唯一标识
@@ -65,32 +75,32 @@ public class UserInfo {
     }
 
     /**
-     * 渠道公司标识（最新下单公司）
-     * @return user_name 渠道公司标识（最新下单公司）
+     * 用户名称
+     * @return user_name 用户名称
      */
-    public Integer getUserName() {
+    public String getUserName() {
         return userName;
     }
 
     /**
-     * 渠道公司标识（最新下单公司）
-     * @param userName 渠道公司标识（最新下单公司）
+     * 用户名称
+     * @param userName 用户名称
      */
-    public void setUserName(Integer userName) {
-        this.userName = userName;
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     /**
-     * 联系电话（暂时不用）
-     * @return phone 联系电话（暂时不用）
+     * 联系电话
+     * @return phone 联系电话
      */
     public String getPhone() {
         return phone;
     }
 
     /**
-     * 联系电话（暂时不用）
-     * @param phone 联系电话（暂时不用）
+     * 联系电话
+     * @param phone 联系电话
      */
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
@@ -129,32 +139,16 @@ public class UserInfo {
     }
 
     /**
-     * 创建时间
-     * @return create_time 创建时间
-     */
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    /**
-     * 创建时间
-     * @param createTime 创建时间
-     */
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    /**
-     * 用户密码
-     * @return password 用户密码
+     * 用户密码（后台用户需要）
+     * @return password 用户密码（后台用户需要）
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     * 用户密码
-     * @param password 用户密码
+     * 用户密码（后台用户需要）
+     * @param password 用户密码（后台用户需要）
      */
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
@@ -177,6 +171,38 @@ public class UserInfo {
     }
 
     /**
+     * 微信公众号用唯一标识
+     * @return open_id 微信公众号用唯一标识
+     */
+    public String getOpenId() {
+        return openId;
+    }
+
+    /**
+     * 微信公众号用唯一标识
+     * @param openId 微信公众号用唯一标识
+     */
+    public void setOpenId(String openId) {
+        this.openId = openId == null ? null : openId.trim();
+    }
+
+    /**
+     * 创建时间
+     * @return create_time 创建时间
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    /**
+     * 创建时间
+     * @param createTime 创建时间
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    /**
      * 修改时间
      * @return update_time 修改时间
      */
@@ -192,6 +218,22 @@ public class UserInfo {
         this.updateTime = updateTime;
     }
 
+    /**
+     * 访问时间
+     * @return visit_time 访问时间
+     */
+    public Date getVisitTime() {
+        return visitTime;
+    }
+
+    /**
+     * 访问时间
+     * @param visitTime 访问时间
+     */
+    public void setVisitTime(Date visitTime) {
+        this.visitTime = visitTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -203,10 +245,12 @@ public class UserInfo {
         sb.append(", phone=").append(phone);
         sb.append(", createName=").append(createName);
         sb.append(", createId=").append(createId);
-        sb.append(", createTime=").append(createTime);
         sb.append(", password=").append(password);
         sb.append(", wechat=").append(wechat);
+        sb.append(", openId=").append(openId);
+        sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
+        sb.append(", visitTime=").append(visitTime);
         sb.append("]");
         return sb.toString();
     }
