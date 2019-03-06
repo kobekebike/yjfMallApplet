@@ -3,6 +3,7 @@ package com.bl.service;
 import com.bl.base.EasyUIResult;
 import com.bl.base.LoginBean;
 import com.bl.base.Response;
+import com.bl.constants.Constant;
 import com.bl.dao.ProductMapper;
 import com.bl.model.Product;
 import com.bl.model.ProductCriteria;
@@ -86,11 +87,16 @@ public class ProductService {
      * @return
      */
     private String saveMainImage(MultipartFile file) {
+        String yjfHome = System.getProperty("yjf_home");
+        if(StringUtils.isBlank(yjfHome)){
+            yjfHome = Constant.YJF_HOME;
+        }
+
         String random = String.valueOf((int) ((Math.random() * 9 + 1) * 100000));
         String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + random;
         String filePath = "/upload/mallImage/" + new SimpleDateFormat("yyyy/MM").format(new Date()) + "/" +
                 fileName + "." + file.getOriginalFilename().split("\\.")[1];
-        File saveDir = new File("E:/workspace/ldhome" + filePath);
+        File saveDir = new File(yjfHome + filePath);
         if (!saveDir.getParentFile().exists()) {
             saveDir.getParentFile().mkdirs();
         }
@@ -128,7 +134,11 @@ public class ProductService {
                 String filePath = saveMainImage(file);
                 //原来有主图时，删除原来的主图，再修改
                 if(StringUtils.isNotBlank(productWithBLOBs.getProductFilePath())){
-                    new File("E:/workspace/ldhome" + productWithBLOBs.getProductFilePath()).delete();
+                    String yjfHome = System.getProperty("yjf_home");
+                    if(StringUtils.isBlank(yjfHome)){
+                        yjfHome = Constant.YJF_HOME;
+                    }
+                    new File(yjfHome + productWithBLOBs.getProductFilePath()).delete();
                 }
                 productWithBLOBs.setProductFilePath(filePath);
             }
@@ -154,6 +164,10 @@ public class ProductService {
      * @return
      */
     public Response deleteProduct(String ids) {
+        String yjfHome = System.getProperty("yjf_home");
+        if(StringUtils.isBlank(yjfHome)){
+            yjfHome = Constant.YJF_HOME;
+        }
         String[] idArr = ids.split(",");
         List<Integer> intList = new ArrayList<>();
         for(String id : idArr){
@@ -170,7 +184,7 @@ public class ProductService {
                 for(Product product : list){
                     //有主图时，删除主图
                     if(StringUtils.isNotBlank(product.getProductFilePath())){
-                        new File("E:/workspace/ldhome" + product.getProductFilePath()).delete();
+                        new File(yjfHome + product.getProductFilePath()).delete();
                     }
                 }
             }

@@ -1,7 +1,9 @@
 package com.bl.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.bl.constants.Constant;
 import com.bl.utils.FileUtil;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -35,7 +37,10 @@ public class UeditorUploadController {
                                    @RequestParam(value = "upfile", required = false) MultipartFile[] files){
         try{
             if (files != null && files.length > 0) {
-                String ldhome = "E:/workspace/ldhome";
+                String yjfHome = System.getProperty("yjf_home");
+                if(StringUtils.isBlank(yjfHome)){
+                    yjfHome = Constant.YJF_HOME;
+                }
                 List<String> list = new ArrayList<String>();
                 JSONObject json=new JSONObject();
                 PrintWriter out = response.getWriter();
@@ -55,7 +60,7 @@ public class UeditorUploadController {
                             //根据当前年月生成图片存放路径
                             String filePathExample = "/ueditor/" + new SimpleDateFormat("yyyy/MM").format(new Date()) + "/";
                             String filePath = filePathExample + fileName + "." + file.getOriginalFilename().split("\\.")[1];
-                            File saveDir = new File(ldhome + filePath);
+                            File saveDir = new File(yjfHome + filePath);
                             if (!saveDir.getParentFile().exists()){
                                 saveDir.getParentFile().mkdirs();
                             }
@@ -87,7 +92,7 @@ public class UeditorUploadController {
                             try{
                                 if(list != null && list.size() > 0){
                                     for(int j = 0; j < list.size(); j++){
-                                        FileUtil.deleteFile(ldhome + list.get(j));
+                                        FileUtil.deleteFile(yjfHome + list.get(j));
                                     }
                                 }
                             }catch(Exception ex){
