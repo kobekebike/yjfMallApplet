@@ -6,6 +6,16 @@ package com.bl.constants;
  */
 public class Constant {
     /**
+     * 微信支付结果处理后返回值:成功
+     */
+    public static final String RESULT_SUCCESS = "<xml><return_code><![CDATA[SUCCESS]]></return_code>"+
+            "<return_msg><![CDATA[OK]]></return_msg>"+
+            "</xml>";
+    /**
+     * 微信支付结果处理后返回值:失败
+     */
+    public static final String RESULT_FAIL = "<xml><return_code><![CDATA[FAIL]]></return_code></xml>";
+    /**
      * 成功
      */
     public static final String CODE_SUCCESS = "0";
@@ -15,4 +25,8 @@ public class Constant {
      */
     public static final String CODE_FAIL = "1";
 
+    /**
+     * 静态路径
+     */
+    public static final String YJF_HOME = "D:/workspace/yjfhome";
 }
