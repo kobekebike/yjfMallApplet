@@ -5,6 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>管理员登录</title>
     <jsp:include page="/commons/common-css.jsp"></jsp:include>
+    <style type="text/css">
+
+    </style>
 </head>
 <body style="background-color: #F3F3F3">
     <div class="easyui-dialog" title="管理员登录" data-options="closable:false,draggable:false" style="width:400px;height:300px;padding:10px;">
@@ -26,6 +29,9 @@
             </div>
         </div>
 </form>
+    </div>
+    <div class="login-copyright">
+        <span><a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备19022904号-1</a></span>
     </div>
 <%@include file="commons/common-js.jsp"%>
 <script type="text/javascript">

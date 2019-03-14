@@ -63,3 +63,14 @@ a:link, a:visited, a:hover, a:active {
 	text-align: left;
 	overflow: visible;
 }
+.login-copyright{
+	position: absolute;
+	left: 45%;
+	bottom: 20px;
+}
+.login-copyright a {
+	color: #93d5cd;
+}
+.login-copyright a:hover{
+	text-decoration: underline;
+}
