@@ -36,7 +36,7 @@
 			<tr>
 				<td class="labelTd">商品主图:</td>
 				<td class="inputTd">
-					<input style="width:50%" name="productFile" id="productFile" class="easyui-filebox" accept="image/*" data-options='onChange:change_photo'>
+					<input style="width:50%" name="productFile" id="productFile" class="easyui-filebox" accept="image/*" data-options='onChange:change_photo,required:true'>
 				</td>
 			</tr>
 			<tr id="previewPictureId" style="display: none">
