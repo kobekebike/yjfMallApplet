@@ -49,6 +49,16 @@ public class MallOrderVo {
      */
     private String addressee;
 
+    /**
+     * 快递公司
+     */
+    private String expressCompany;
+
+    /**
+     * 快递单号
+     */
+    private String expressNum;
+
     public String getAddressee() {
         return addressee;
     }
@@ -119,5 +129,21 @@ public class MallOrderVo {
 
     public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public String getExpressCompany() {
+        return expressCompany;
+    }
+
+    public void setExpressCompany(String expressCompany) {
+        this.expressCompany = expressCompany;
+    }
+
+    public String getExpressNum() {
+        return expressNum;
+    }
+
+    public void setExpressNum(String expressNum) {
+        this.expressNum = expressNum;
     }
 }

@@ -3,7 +3,6 @@ package com.bl.controller;
 import com.bl.base.EasyUIResult;
 import com.bl.base.Response;
 import com.bl.model.MallOrder;
-import com.bl.model.ProductType;
 import com.bl.service.MallOrderService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -95,5 +94,19 @@ public class MallOrderController {
     public Response deleteMallOrderByOrderId(HttpServletRequest req, HttpServletResponse res,
                                     @RequestParam Integer orderId){
         return mallOrderService.deleteMallOrderByOrderId(orderId);
+    }
+
+    /**
+     * 补充订单的快递信息，已发货
+     * @param req
+     * @param res
+     * @param mallOrder
+     * @return
+     */
+    @RequestMapping("updateOrderStatus.do")
+    @ResponseBody
+    public Response updateOrderStatus(HttpServletRequest req, HttpServletResponse res,
+                                   MallOrder mallOrder){
+        return mallOrderService.updateOrderStatus(mallOrder);
     }
 }

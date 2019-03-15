@@ -19,7 +19,7 @@ import java.util.Random;
 public class MallOrderService {
 
     @Autowired
-    private MallOrderMapper mallOrderMapper;
+    private MallOrderMapper   mallOrderMapper;
     @Autowired
     private MallOrderMapperEx mallOrderMapperEx;
 
@@ -103,6 +103,20 @@ public class MallOrderService {
             return Response.createSuccessResult("删除成功", null);
         }else{
             return Response.createFailResult("删除失败", null);
+        }
+    }
+
+    /**
+     * 补充订单的快递信息，已发货
+     * @param mallOrder
+     * @return
+     */
+    public Response updateOrderStatus(MallOrder mallOrder) {
+        mallOrder.setUpdateTime(new Date());
+        if(mallOrderMapper.updateByPrimaryKeySelective(mallOrder) == 1){
+            return Response.createSuccessResult("修改成功", null);
+        }else{
+            return Response.createFailResult("修改失败", null);
         }
     }
 }

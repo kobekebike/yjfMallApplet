@@ -11,6 +11,8 @@
 		<result column="order_status" property="orderStatus" jdbcType="INTEGER" />
 		<result column="product_title" property="productTitle" jdbcType="VARCHAR" />
 		<result column="addressee" property="addressee" jdbcType="VARCHAR" />
+		<result column="express_company" property="expressCompany" jdbcType="VARCHAR" />
+		<result column="express_num" property="expressNum" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<resultMap id="WXBaseResultMap" type="com.bl.pojo.MallOrderWXVo" >
@@ -42,7 +44,9 @@
 		mo.remark,
 		mo.create_time,
 		mo.order_status,
-		a.addressee
+		a.addressee,
+		mo.express_company,
+		mo.express_num
 		FROM mall_order mo JOIN product p ON mo.product_id=p.product_id
 		LEFT JOIN address a ON mo.address_id=a.address_id
 		ORDER BY mo.create_time
