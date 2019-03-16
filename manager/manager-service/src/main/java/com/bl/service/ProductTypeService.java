@@ -93,7 +93,7 @@ public class ProductTypeService {
      */
     public Response getAllProductTypeList() {
         ProductTypeCriteria productTypeCriteria = new ProductTypeCriteria();
-        productTypeCriteria.setOrderByClause("sort desc");
+        productTypeCriteria.setOrderByClause("sort");
         return Response.createSuccessResult("查询成功", productTypeMapper.selectByExample(productTypeCriteria));
     }
 }

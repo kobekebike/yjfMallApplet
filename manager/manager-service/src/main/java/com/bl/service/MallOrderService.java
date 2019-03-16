@@ -2,6 +2,7 @@ package com.bl.service;
 
 import com.bl.base.EasyUIResult;
 import com.bl.base.Response;
+import com.bl.constants.Constant;
 import com.bl.dao.MallOrderMapper;
 import com.bl.dao.MallOrderMapperEx;
 import com.bl.model.MallOrder;
@@ -118,5 +119,18 @@ public class MallOrderService {
         }else{
             return Response.createFailResult("修改失败", null);
         }
+    }
+
+    /**
+     * 根据用户标识获取购物车里的商品数量
+     * @param userId
+     * @return
+     */
+    public Response getCartMallOrderCountByUserId(Integer userId) {
+        MallOrderCriteria mallOrderCriteria = new MallOrderCriteria();
+        mallOrderCriteria.createCriteria()
+                .andUserIdEqualTo(userId)
+                .andOrderStatusEqualTo(Constant.MALL_ORDER_STATUS_NON_PAYMENT);//1未付款，即购物车的状态
+        return Response.createSuccessResult("购物车的商品数量", mallOrderMapper.countByExample(mallOrderCriteria));
     }
 }
