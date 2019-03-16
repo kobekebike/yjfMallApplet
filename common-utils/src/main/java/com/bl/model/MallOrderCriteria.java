@@ -101,7 +101,7 @@ public class MallOrderCriteria {
     }
 
     /**
-     * mall_order 2019-02-11
+     * mall_order 2019-03-15
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1133,6 +1133,146 @@ public class MallOrderCriteria {
             addCriterion("product_num not between", value1, value2, "productNum");
             return (Criteria) this;
         }
+
+        public Criteria andExpressCompanyIsNull() {
+            addCriterion("express_company is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressCompanyIsNotNull() {
+            addCriterion("express_company is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressCompanyEqualTo(String value) {
+            addCriterion("express_company =", value, "expressCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressCompanyNotEqualTo(String value) {
+            addCriterion("express_company <>", value, "expressCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressCompanyGreaterThan(String value) {
+            addCriterion("express_company >", value, "expressCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressCompanyGreaterThanOrEqualTo(String value) {
+            addCriterion("express_company >=", value, "expressCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressCompanyLessThan(String value) {
+            addCriterion("express_company <", value, "expressCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressCompanyLessThanOrEqualTo(String value) {
+            addCriterion("express_company <=", value, "expressCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressCompanyLike(String value) {
+            addCriterion("express_company like", value, "expressCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressCompanyNotLike(String value) {
+            addCriterion("express_company not like", value, "expressCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressCompanyIn(List<String> values) {
+            addCriterion("express_company in", values, "expressCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressCompanyNotIn(List<String> values) {
+            addCriterion("express_company not in", values, "expressCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressCompanyBetween(String value1, String value2) {
+            addCriterion("express_company between", value1, value2, "expressCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressCompanyNotBetween(String value1, String value2) {
+            addCriterion("express_company not between", value1, value2, "expressCompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNumIsNull() {
+            addCriterion("express_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNumIsNotNull() {
+            addCriterion("express_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNumEqualTo(String value) {
+            addCriterion("express_num =", value, "expressNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNumNotEqualTo(String value) {
+            addCriterion("express_num <>", value, "expressNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNumGreaterThan(String value) {
+            addCriterion("express_num >", value, "expressNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNumGreaterThanOrEqualTo(String value) {
+            addCriterion("express_num >=", value, "expressNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNumLessThan(String value) {
+            addCriterion("express_num <", value, "expressNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNumLessThanOrEqualTo(String value) {
+            addCriterion("express_num <=", value, "expressNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNumLike(String value) {
+            addCriterion("express_num like", value, "expressNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNumNotLike(String value) {
+            addCriterion("express_num not like", value, "expressNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNumIn(List<String> values) {
+            addCriterion("express_num in", values, "expressNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNumNotIn(List<String> values) {
+            addCriterion("express_num not in", values, "expressNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNumBetween(String value1, String value2) {
+            addCriterion("express_num between", value1, value2, "expressNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressNumNotBetween(String value1, String value2) {
+            addCriterion("express_num not between", value1, value2, "expressNum");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -1143,7 +1283,7 @@ public class MallOrderCriteria {
     }
 
     /**
-     * mall_order 2019-02-11
+     * mall_order 2019-03-15
      */
     public static class Criterion {
         private String condition;

@@ -109,4 +109,18 @@ public class MallOrderController {
                                    MallOrder mallOrder){
         return mallOrderService.updateOrderStatus(mallOrder);
     }
+
+    /**
+     * 根据用户标识获取购物车里的商品数量
+     * @param req
+     * @param res
+     * @param userId
+     * @return
+     */
+    @RequestMapping("getCartMallOrderCountByUserId.do")
+    @ResponseBody
+    public Response getCartMallOrderCountByUserId(HttpServletRequest req, HttpServletResponse res,
+                                              @RequestParam(value = "userId", defaultValue = "0") Integer userId){
+        return mallOrderService.getCartMallOrderCountByUserId(userId);
+    }
 }

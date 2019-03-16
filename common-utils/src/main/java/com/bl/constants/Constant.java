@@ -6,6 +6,11 @@ package com.bl.constants;
  */
 public class Constant {
     /**
+     * 订单状态：
+     *      1未付款，即购物车的状态
+     */
+    public static final int MALL_ORDER_STATUS_NON_PAYMENT = 1;
+    /**
      * 微信支付结果处理后返回值:成功
      */
     public static final String RESULT_SUCCESS = "<xml><return_code><![CDATA[SUCCESS]]></return_code>"+

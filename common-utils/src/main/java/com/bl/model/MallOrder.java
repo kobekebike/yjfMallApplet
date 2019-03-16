@@ -40,7 +40,7 @@ public class MallOrder {
     private Date sendTime;
 
     /**
-     * 订单状态：未付款/已付款/已发货/取消
+     * 订单状态：1未付款/2已付款/3已发货/4取消
      */
     private Integer orderStatus;
 
@@ -83,6 +83,16 @@ public class MallOrder {
      * 商品数量
      */
     private Integer productNum;
+
+    /**
+     * 快递公司
+     */
+    private String expressCompany;
+
+    /**
+     * 快递单号
+     */
+    private String expressNum;
 
     /**
      * 唯一标识（主键）
@@ -197,16 +207,16 @@ public class MallOrder {
     }
 
     /**
-     * 订单状态：未付款/已付款/已发货/取消
-     * @return order_status 订单状态：未付款/已付款/已发货/取消
+     * 订单状态：1未付款/2已付款/3已发货/4取消
+     * @return order_status 订单状态：1未付款/2已付款/3已发货/4取消
      */
     public Integer getOrderStatus() {
         return orderStatus;
     }
 
     /**
-     * 订单状态：未付款/已付款/已发货/取消
-     * @param orderStatus 订单状态：未付款/已付款/已发货/取消
+     * 订单状态：1未付款/2已付款/3已发货/4取消
+     * @param orderStatus 订单状态：1未付款/2已付款/3已发货/4取消
      */
     public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
@@ -340,6 +350,38 @@ public class MallOrder {
         this.productNum = productNum;
     }
 
+    /**
+     * 快递公司
+     * @return express_company 快递公司
+     */
+    public String getExpressCompany() {
+        return expressCompany;
+    }
+
+    /**
+     * 快递公司
+     * @param expressCompany 快递公司
+     */
+    public void setExpressCompany(String expressCompany) {
+        this.expressCompany = expressCompany == null ? null : expressCompany.trim();
+    }
+
+    /**
+     * 快递单号
+     * @return express_num 快递单号
+     */
+    public String getExpressNum() {
+        return expressNum;
+    }
+
+    /**
+     * 快递单号
+     * @param expressNum 快递单号
+     */
+    public void setExpressNum(String expressNum) {
+        this.expressNum = expressNum == null ? null : expressNum.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -362,6 +404,8 @@ public class MallOrder {
         sb.append(", updateTime=").append(updateTime);
         sb.append(", productId=").append(productId);
         sb.append(", productNum=").append(productNum);
+        sb.append(", expressCompany=").append(expressCompany);
+        sb.append(", expressNum=").append(expressNum);
         sb.append("]");
         return sb.toString();
     }

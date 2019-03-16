@@ -18,6 +18,8 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="product_id" property="productId" jdbcType="INTEGER" />
     <result column="product_num" property="productNum" jdbcType="INTEGER" />
+    <result column="express_company" property="expressCompany" jdbcType="VARCHAR" />
+    <result column="express_num" property="expressNum" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -80,7 +82,7 @@
   <sql id="Base_Column_List" >
     order_id, order_num, user_id, remark, payment_id, order_amount, send_time, order_status, 
     pay_time, create_time, create_id, create_name, address_id, update_time, product_id, 
-    product_num
+    product_num, express_company, express_num
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bl.model.MallOrderCriteria" >
     select
@@ -121,13 +123,15 @@
       send_time, order_status, pay_time, 
       create_time, create_id, create_name, 
       address_id, update_time, product_id, 
-      product_num)
+      product_num, express_company, express_num
+      )
     values (#{orderId,jdbcType=INTEGER}, #{orderNum,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
       #{remark,jdbcType=VARCHAR}, #{paymentId,jdbcType=INTEGER}, #{orderAmount,jdbcType=DECIMAL}, 
       #{sendTime,jdbcType=TIMESTAMP}, #{orderStatus,jdbcType=INTEGER}, #{payTime,jdbcType=TIMESTAMP}, 
       #{createTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=INTEGER}, #{createName,jdbcType=VARCHAR}, 
       #{addressId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{productId,jdbcType=INTEGER}, 
-      #{productNum,jdbcType=INTEGER})
+      #{productNum,jdbcType=INTEGER}, #{expressCompany,jdbcType=VARCHAR}, #{expressNum,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.bl.model.MallOrder" useGeneratedKeys="true" keyProperty="orderId" >
     insert into mall_order
@@ -180,6 +184,12 @@
       <if test="productNum != null" >
         product_num,
       </if>
+      <if test="expressCompany != null" >
+        express_company,
+      </if>
+      <if test="expressNum != null" >
+        express_num,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -229,6 +239,12 @@
       </if>
       <if test="productNum != null" >
         #{productNum,jdbcType=INTEGER},
+      </if>
+      <if test="expressCompany != null" >
+        #{expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="expressNum != null" >
+        #{expressNum,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -289,6 +305,12 @@
       <if test="record.productNum != null" >
         product_num = #{record.productNum,jdbcType=INTEGER},
       </if>
+      <if test="record.expressCompany != null" >
+        express_company = #{record.expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressNum != null" >
+        express_num = #{record.expressNum,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -311,7 +333,9 @@
       address_id = #{record.addressId,jdbcType=INTEGER},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       product_id = #{record.productId,jdbcType=INTEGER},
-      product_num = #{record.productNum,jdbcType=INTEGER}
+      product_num = #{record.productNum,jdbcType=INTEGER},
+      express_company = #{record.expressCompany,jdbcType=VARCHAR},
+      express_num = #{record.expressNum,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -364,6 +388,12 @@
       <if test="productNum != null" >
         product_num = #{productNum,jdbcType=INTEGER},
       </if>
+      <if test="expressCompany != null" >
+        express_company = #{expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="expressNum != null" >
+        express_num = #{expressNum,jdbcType=VARCHAR},
+      </if>
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
@@ -383,7 +413,9 @@
       address_id = #{addressId,jdbcType=INTEGER},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       product_id = #{productId,jdbcType=INTEGER},
-      product_num = #{productNum,jdbcType=INTEGER}
+      product_num = #{productNum,jdbcType=INTEGER},
+      express_company = #{expressCompany,jdbcType=VARCHAR},
+      express_num = #{expressNum,jdbcType=VARCHAR}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
 </mapper>
