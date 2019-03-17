@@ -40,6 +40,9 @@ public class ProductTypeService {
      * @return
      */
     public Response saveProductType(ProductType productType){
+        //查询类型排序有没有重复
+        if (checkSort(productType)) return Response.createFailResult("分类排序重复,请重新输入", null);
+
         productType.setCreateTime(new Date());
         productType.setUpdateTime(new Date());
         if(productTypeMapper.insertSelective(productType) == 1){
@@ -50,11 +53,29 @@ public class ProductTypeService {
     }
 
     /**
+     * 查询类型排序有没有重复
+     * @param productType
+     * @return
+     */
+    public boolean checkSort(ProductType productType) {
+        ProductTypeCriteria productTypeCriteria = new ProductTypeCriteria();
+        productTypeCriteria.createCriteria().andSortEqualTo(productType.getSort());
+        List<ProductType> list = productTypeMapper.selectByExample(productTypeCriteria);
+        if(list != null && !list.isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * 修改商品类型
      * @param productType
      * @return
      */
     public Response updateProductType(ProductType productType){
+        //查询类型排序有没有重复
+        if (checkSort(productType)) return Response.createFailResult("分类排序重复,请重新输入", null);
+
         productType.setUpdateTime(new Date());
         if(productTypeMapper.updateByPrimaryKeySelective(productType) == 1){
             return Response.createSuccessResult("保存成功", null);
