@@ -33,9 +33,9 @@
 		var url = "/productTypeController/updateProductType.do";
 		var data = ajaxFormSubmitOnce("productTypeEditForm","submitEditProductTypeId",url);
         $.messager.alert("提示",data.message);
+		$("#submitEditProductTypeId").addClass("clicking");
 		if(data.code == 0){
             clearProductTypeEditForm();
-            $("#submitEditProductTypeId").addClass("clicking");
             $("#productTypeEditWindow").window("close");
             $('#productTypeList').datagrid('reload');
 		}

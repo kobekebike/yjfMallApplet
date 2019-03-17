@@ -34,9 +34,9 @@
 		var url = "/productTypeController/saveProductType.do";
 		var data = ajaxFormSubmitOnce("productTypeAddForm","submitProductTypeId",url);
         $.messager.alert("提示",data.message);
+		$("#submitProductTypeId").addClass("clicking");
 		if(data.code == 0){
             clearProductTypeForm();
-		    $("#submitProductTypeId").addClass("clicking")
 			$("#productTypeAddWindow").window("close");
 			$('#productTypeList').datagrid('reload');
 		}
