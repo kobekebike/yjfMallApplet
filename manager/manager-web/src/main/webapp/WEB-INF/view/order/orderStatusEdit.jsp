@@ -19,7 +19,7 @@
 				</td>
 			</tr>
 	    </table>
-	    <input type="hidden" name="orderId"/>
+	    <input type="hidden" name="orderIds"/>
 		<input type="hidden" name="orderStatus" value="3">
 	</form>
 	<div style="padding:5px">

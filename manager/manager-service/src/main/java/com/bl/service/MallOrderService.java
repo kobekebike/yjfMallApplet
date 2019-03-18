@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -110,11 +111,20 @@ public class MallOrderService {
     /**
      * 补充订单的快递信息，已发货
      * @param mallOrder
+     * @param orderIds  //订单标识字符串
      * @return
      */
-    public Response updateOrderStatus(MallOrder mallOrder) {
-        mallOrder.setUpdateTime(new Date());
-        if(mallOrderMapper.updateByPrimaryKeySelective(mallOrder) == 1){
+    public Response updateOrderStatus(MallOrder mallOrder, String orderIds) {
+        int count = 0;
+        List<Integer> idList = new ArrayList<>();
+        String[] idArr = orderIds.split(",");
+        for(String idStr : idArr){
+            idList.add(Integer.valueOf(idStr));
+            mallOrder.setUpdateTime(new Date());
+            mallOrder.setOrderId(Integer.valueOf(idStr));
+            count += mallOrderMapper.updateByPrimaryKeySelective(mallOrder);
+        }
+        if(count > 0){
             return Response.createSuccessResult("修改成功", null);
         }else{
             return Response.createFailResult("修改失败", null);

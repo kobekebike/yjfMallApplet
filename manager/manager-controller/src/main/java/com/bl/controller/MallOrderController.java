@@ -106,8 +106,8 @@ public class MallOrderController {
     @RequestMapping("updateOrderStatus.do")
     @ResponseBody
     public Response updateOrderStatus(HttpServletRequest req, HttpServletResponse res,
-                                   MallOrder mallOrder){
-        return mallOrderService.updateOrderStatus(mallOrder);
+                                   MallOrder mallOrder, String orderIds){
+        return mallOrderService.updateOrderStatus(mallOrder, orderIds);
     }
 
     /**
