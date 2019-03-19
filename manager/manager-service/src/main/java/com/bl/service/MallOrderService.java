@@ -137,17 +137,10 @@ public class MallOrderService {
      * @return
      */
     public Response getCartMallOrderCountByUserId(Integer userId) {
-        int count = 0;
         MallOrderCriteria mallOrderCriteria = new MallOrderCriteria();
         mallOrderCriteria.createCriteria()
                 .andUserIdEqualTo(userId)
                 .andOrderStatusEqualTo(Constant.MALL_ORDER_STATUS_NON_PAYMENT);//1未付款，即购物车的状态
-        List<MallOrder> list = mallOrderMapper.selectByExample(mallOrderCriteria);
-        if(list != null && !list.isEmpty()){
-            for(MallOrder mallOrder : list){
-                count += mallOrder.getProductNum();
-            }
-        }
-        return Response.createSuccessResult("购物车的商品数量", count);
+        return Response.createSuccessResult("购物车的商品数量", mallOrderMapper.countByExample(mallOrderCriteria));
     }
 }
