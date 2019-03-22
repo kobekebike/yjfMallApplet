@@ -42,6 +42,9 @@
                     $("#submitProductId").show();
                     $("#updateProductId").hide();
                     $('#productAddForm').form('reset');
+
+                    //添加主图必填限制
+                    $("#productFile").filebox({required:true});
                 }
             }).window("open");
         }
@@ -79,6 +82,8 @@
                         $("#Img").attr("src","http://image.jfy.com"+data.productFilePath);
                         $("#previewPictureId").show();
                     }
+                    //删除主图必填限制
+                    $("#productFile").filebox({required:false});
                 }
             }).window("open");
         }
