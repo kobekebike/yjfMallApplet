@@ -101,7 +101,7 @@ public class ProductCriteria {
     }
 
     /**
-     * product 2019-02-09
+     * product 2019-03-23
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1103,6 +1103,66 @@ public class ProductCriteria {
             addCriterion("update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }
+
+        public Criteria andSoldOutNumIsNull() {
+            addCriterion("sold_out_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldOutNumIsNotNull() {
+            addCriterion("sold_out_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldOutNumEqualTo(Integer value) {
+            addCriterion("sold_out_num =", value, "soldOutNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldOutNumNotEqualTo(Integer value) {
+            addCriterion("sold_out_num <>", value, "soldOutNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldOutNumGreaterThan(Integer value) {
+            addCriterion("sold_out_num >", value, "soldOutNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldOutNumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sold_out_num >=", value, "soldOutNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldOutNumLessThan(Integer value) {
+            addCriterion("sold_out_num <", value, "soldOutNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldOutNumLessThanOrEqualTo(Integer value) {
+            addCriterion("sold_out_num <=", value, "soldOutNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldOutNumIn(List<Integer> values) {
+            addCriterion("sold_out_num in", values, "soldOutNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldOutNumNotIn(List<Integer> values) {
+            addCriterion("sold_out_num not in", values, "soldOutNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldOutNumBetween(Integer value1, Integer value2) {
+            addCriterion("sold_out_num between", value1, value2, "soldOutNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldOutNumNotBetween(Integer value1, Integer value2) {
+            addCriterion("sold_out_num not between", value1, value2, "soldOutNum");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -1113,7 +1173,7 @@ public class ProductCriteria {
     }
 
     /**
-     * product 2019-02-09
+     * product 2019-03-23
      */
     public static class Criterion {
         private String condition;

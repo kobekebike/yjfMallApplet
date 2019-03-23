@@ -17,6 +17,7 @@
     <result column="product_sort" property="productSort" jdbcType="INTEGER" />
     <result column="product_code" property="productCode" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="sold_out_num" property="soldOutNum" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.bl.model.ProductWithBLOBs" extends="BaseResultMap" >
     <result column="product_detail" property="productDetail" jdbcType="LONGVARBINARY" />
@@ -82,7 +83,7 @@
   <sql id="Base_Column_List" >
     product_id, product_describe, product_price, create_name, create_id, create_time, 
     product_status, product_type, product_type_id, product_discount, product_title, product_file_path, 
-    product_sort, product_code, update_time
+    product_sort, product_code, update_time, sold_out_num
   </sql>
   <sql id="Blob_Column_List" >
     product_detail
@@ -144,13 +145,13 @@
       product_status, product_type, product_type_id, 
       product_discount, product_title, product_file_path, 
       product_sort, product_code, update_time, 
-      product_detail)
+      sold_out_num, product_detail)
     values (#{productId,jdbcType=INTEGER}, #{productDescribe,jdbcType=VARCHAR}, #{productPrice,jdbcType=DECIMAL}, 
       #{createName,jdbcType=VARCHAR}, #{createId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{productStatus,jdbcType=INTEGER}, #{productType,jdbcType=VARCHAR}, #{productTypeId,jdbcType=INTEGER}, 
       #{productDiscount,jdbcType=INTEGER}, #{productTitle,jdbcType=VARCHAR}, #{productFilePath,jdbcType=VARCHAR}, 
       #{productSort,jdbcType=INTEGER}, #{productCode,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{productDetail,jdbcType=LONGVARBINARY})
+      #{soldOutNum,jdbcType=INTEGER}, #{productDetail,jdbcType=LONGVARBINARY})
   </insert>
   <insert id="insertSelective" parameterType="com.bl.model.ProductWithBLOBs" useGeneratedKeys="true" keyProperty="productId" >
     insert into product
@@ -199,6 +200,9 @@
       </if>
       <if test="updateTime != null" >
         update_time,
+      </if>
+      <if test="soldOutNum != null" >
+        sold_out_num,
       </if>
       <if test="productDetail != null" >
         product_detail,
@@ -249,6 +253,9 @@
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="soldOutNum != null" >
+        #{soldOutNum,jdbcType=INTEGER},
       </if>
       <if test="productDetail != null" >
         #{productDetail,jdbcType=LONGVARBINARY},
@@ -309,6 +316,9 @@
       <if test="record.updateTime != null" >
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.soldOutNum != null" >
+        sold_out_num = #{record.soldOutNum,jdbcType=INTEGER},
+      </if>
       <if test="record.productDetail != null" >
         product_detail = #{record.productDetail,jdbcType=LONGVARBINARY},
       </if>
@@ -334,6 +344,7 @@
       product_sort = #{record.productSort,jdbcType=INTEGER},
       product_code = #{record.productCode,jdbcType=VARCHAR},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      sold_out_num = #{record.soldOutNum,jdbcType=INTEGER},
       product_detail = #{record.productDetail,jdbcType=LONGVARBINARY}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -355,7 +366,8 @@
       product_file_path = #{record.productFilePath,jdbcType=VARCHAR},
       product_sort = #{record.productSort,jdbcType=INTEGER},
       product_code = #{record.productCode,jdbcType=VARCHAR},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      sold_out_num = #{record.soldOutNum,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -405,6 +417,9 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="soldOutNum != null" >
+        sold_out_num = #{soldOutNum,jdbcType=INTEGER},
+      </if>
       <if test="productDetail != null" >
         product_detail = #{productDetail,jdbcType=LONGVARBINARY},
       </if>
@@ -427,6 +442,7 @@
       product_sort = #{productSort,jdbcType=INTEGER},
       product_code = #{productCode,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
+      sold_out_num = #{soldOutNum,jdbcType=INTEGER},
       product_detail = #{productDetail,jdbcType=LONGVARBINARY}
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
@@ -445,7 +461,8 @@
       product_file_path = #{productFilePath,jdbcType=VARCHAR},
       product_sort = #{productSort,jdbcType=INTEGER},
       product_code = #{productCode,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      sold_out_num = #{soldOutNum,jdbcType=INTEGER}
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
 </mapper>

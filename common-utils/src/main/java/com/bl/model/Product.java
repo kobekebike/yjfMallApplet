@@ -30,7 +30,7 @@ public class Product extends ProductKey {
     private Date createTime;
 
     /**
-     * 是否启用：用于处理下架的产品（备用）
+     * 是否启用：用于处理下架的产品（备用）1下架，2上架
      */
     private Integer productStatus;
 
@@ -73,6 +73,11 @@ public class Product extends ProductKey {
      * 修改时间
      */
     private Date updateTime;
+
+    /**
+     * 已售数量
+     */
+    private Integer soldOutNum;
 
     /**
      * 产品描述
@@ -155,16 +160,16 @@ public class Product extends ProductKey {
     }
 
     /**
-     * 是否启用：用于处理下架的产品（备用）
-     * @return product_status 是否启用：用于处理下架的产品（备用）
+     * 是否启用：用于处理下架的产品（备用）1下架，2上架
+     * @return product_status 是否启用：用于处理下架的产品（备用）1下架，2上架
      */
     public Integer getProductStatus() {
         return productStatus;
     }
 
     /**
-     * 是否启用：用于处理下架的产品（备用）
-     * @param productStatus 是否启用：用于处理下架的产品（备用）
+     * 是否启用：用于处理下架的产品（备用）1下架，2上架
+     * @param productStatus 是否启用：用于处理下架的产品（备用）1下架，2上架
      */
     public void setProductStatus(Integer productStatus) {
         this.productStatus = productStatus;
@@ -298,6 +303,22 @@ public class Product extends ProductKey {
         this.updateTime = updateTime;
     }
 
+    /**
+     * 已售数量
+     * @return sold_out_num 已售数量
+     */
+    public Integer getSoldOutNum() {
+        return soldOutNum;
+    }
+
+    /**
+     * 已售数量
+     * @param soldOutNum 已售数量
+     */
+    public void setSoldOutNum(Integer soldOutNum) {
+        this.soldOutNum = soldOutNum;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -318,6 +339,7 @@ public class Product extends ProductKey {
         sb.append(", productSort=").append(productSort);
         sb.append(", productCode=").append(productCode);
         sb.append(", updateTime=").append(updateTime);
+        sb.append(", soldOutNum=").append(soldOutNum);
         sb.append("]");
         return sb.toString();
     }
