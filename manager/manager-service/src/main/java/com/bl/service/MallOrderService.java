@@ -56,7 +56,8 @@ public class MallOrderService {
         MallOrderCriteria mallOrderCriteria = new MallOrderCriteria();
         mallOrderCriteria.createCriteria()
                 .andUserIdEqualTo(mallOrder.getUserId())
-                .andProductIdEqualTo(mallOrder.getProductId());
+                .andProductIdEqualTo(mallOrder.getProductId())
+                .andOrderStatusEqualTo(mallOrder.getOrderStatus());
         List<MallOrder> list = mallOrderMapper.selectByExample(mallOrderCriteria);
         if(list != null && !list.isEmpty()){
             mallOrder.setProductNum(list.get(0).getProductNum()+1);
