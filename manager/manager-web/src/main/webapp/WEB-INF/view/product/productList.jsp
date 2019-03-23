@@ -10,6 +10,7 @@
             <th data-options="field:'productType',width:100">商品类型</th>
             <th data-options="field:'productPrice',width:100">商品价格</th>
             <th data-options="field:'productStatus',formatter:productStatusFormatter,width:100">商品状态</th>
+            <th data-options="field:'soldOutNum',width:50">已售</th>
             <th data-options="field:'createTime',width:150,formatter:dateTimeFormatter">创建时间</th>
             <th data-options="field:'updateTime',width:150,formatter:dateTimeFormatter">修改时间</th>
             <th data-options="field:'productSort',width:70">商品排序</th>

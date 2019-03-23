@@ -68,6 +68,10 @@ public class ProductService {
                 e.printStackTrace();
             }
         }
+        //已售数量没有则默认为0
+        if(productWithBLOBs.getSoldOutNum() == null){
+            productWithBLOBs.setSoldOutNum(0);
+        }
         //商品状态:原始状态为下架(1下架,2上架)
         productWithBLOBs.setProductStatus(1);
         productWithBLOBs.setCreateId(loginBean.getUserId());

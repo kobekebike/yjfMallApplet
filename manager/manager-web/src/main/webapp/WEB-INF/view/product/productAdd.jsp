@@ -31,6 +31,12 @@
 					<input class="easyui-numberbox" type="number" name="productSort" data-options="min:1,max:99999999,required:true" style="width:80%"/>
 				</td>
 	        </tr>
+	        <tr>
+	            <td class="labelTd">已售数量:</td>
+	            <td class="inputTd">
+					<input class="easyui-numberbox" type="text" name="soldOutNum" data-options="min:0,max:99999999,required:true" style="width:80%" value="0"/>
+	            </td>
+	        </tr>
 	    </table>
 		<table border="0" cellpadding="0" cellspacing="1" class="formTable">
 			<tr>
