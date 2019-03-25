@@ -54,12 +54,15 @@ public class AddressController {
                                    Address address) throws UnsupportedEncodingException {
         res.setCharacterEncoding("utf-8");
         res.setContentType("text/json;charset=utf-8");
-        String cityName = new String(req.getParameter("cityName").getBytes("iso-8859-1"),"utf-8");
-        String detailAddress = new String(req.getParameter("detailAddress").getBytes("iso-8859-1"),"utf-8");
-        String addressee = new String(req.getParameter("addressee").getBytes("iso-8859-1"),"utf-8");
-        address.setCityName(cityName);
-        address.setAddressee(addressee);
-        address.setDetailAddress(detailAddress);
+//        System.err.println(address);
+//        System.err.println("addressee-00000000000000--"+req.getParameter("addressee"));
+//        String cityName = new String(req.getParameter("cityName").getBytes("iso-8859-1"),"utf-8");
+//        String detailAddress = new String(req.getParameter("detailAddress").getBytes("iso-8859-1"),"utf-8");
+//        String addressee = new String(req.getParameter("addressee").getBytes("iso-8859-1"),"utf-8");
+//        System.err.println("addressee--111111111111111111-"+addressee);
+        address.setCityName(req.getParameter("cityName"));
+        address.setAddressee(req.getParameter("addressee"));
+        address.setDetailAddress(req.getParameter("detailAddress"));
         return addressService.saveAddress(address);
     }
 
@@ -76,12 +79,12 @@ public class AddressController {
                                          Address address) throws UnsupportedEncodingException{
         res.setCharacterEncoding("utf-8");
         res.setContentType("text/json;charset=utf-8");
-        String cityName = new String(req.getParameter("cityName").getBytes("iso-8859-1"),"utf-8");
-        String detailAddress = new String(req.getParameter("detailAddress").getBytes("iso-8859-1"),"utf-8");
-        String addressee = new String(req.getParameter("addressee").getBytes("iso-8859-1"),"utf-8");
-        address.setCityName(cityName);
-        address.setAddressee(addressee);
-        address.setDetailAddress(detailAddress);
+//        String cityName = new String(req.getParameter("cityName").getBytes("iso-8859-1"),"utf-8");
+//        String detailAddress = new String(req.getParameter("detailAddress").getBytes("iso-8859-1"),"utf-8");
+//        String addressee = new String(req.getParameter("addressee").getBytes("iso-8859-1"),"utf-8");
+        address.setCityName(req.getParameter("cityName"));
+        address.setAddressee(req.getParameter("addressee"));
+        address.setDetailAddress(req.getParameter("detailAddress"));
         return addressService.updateDefaultAddress(address);
     }
 
