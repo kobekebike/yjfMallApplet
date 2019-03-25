@@ -7,12 +7,14 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 
 @Controller
 @RequestMapping("addressController")
@@ -49,7 +51,15 @@ public class AddressController {
     @RequestMapping("saveAddress.do")
     @ResponseBody
     public Response saveAddress(HttpServletRequest req, HttpServletResponse res,
-                                    Address address){
+                                   Address address) throws UnsupportedEncodingException {
+        res.setCharacterEncoding("utf-8");
+        res.setContentType("text/json;charset=utf-8");
+        String cityName = new String(req.getParameter("cityName").getBytes("iso-8859-1"),"utf-8");
+        String detailAddress = new String(req.getParameter("detailAddress").getBytes("iso-8859-1"),"utf-8");
+        String addressee = new String(req.getParameter("addressee").getBytes("iso-8859-1"),"utf-8");
+        address.setCityName(cityName);
+        address.setAddressee(addressee);
+        address.setDetailAddress(detailAddress);
         return addressService.saveAddress(address);
     }
 
@@ -63,7 +73,15 @@ public class AddressController {
     @RequestMapping("updateDefaultAddress.do")
     @ResponseBody
     public Response updateDefaultAddress(HttpServletRequest req, HttpServletResponse res,
-                                         Address address){
+                                         Address address) throws UnsupportedEncodingException{
+        res.setCharacterEncoding("utf-8");
+        res.setContentType("text/json;charset=utf-8");
+        String cityName = new String(req.getParameter("cityName").getBytes("iso-8859-1"),"utf-8");
+        String detailAddress = new String(req.getParameter("detailAddress").getBytes("iso-8859-1"),"utf-8");
+        String addressee = new String(req.getParameter("addressee").getBytes("iso-8859-1"),"utf-8");
+        address.setCityName(cityName);
+        address.setAddressee(addressee);
+        address.setDetailAddress(detailAddress);
         return addressService.updateDefaultAddress(address);
     }
 

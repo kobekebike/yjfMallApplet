@@ -80,7 +80,7 @@
                     });
                     //加载主图
                     if(data.productFilePath){
-                        $("#Img").attr("src","http://image.jfy.com"+data.productFilePath);
+                        $("#Img").attr("src","http://image.jfegf.com/baseFileHome"+data.productFilePath);
                         $("#previewPictureId").show();
                     }
                     //删除主图必填限制
@@ -140,7 +140,7 @@
                 });
                 //加载主图
                 if(obj.productFilePath){
-                    $("#Img").attr("src","http://image.jfy.com"+obj.productFilePath);
+                    $("#Img").attr("src","http://image.jfegf.com/baseFileHome"+obj.productFilePath);
                     $("#previewPictureId").show();
                 }
             }
