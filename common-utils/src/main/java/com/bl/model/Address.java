@@ -63,6 +63,12 @@ public class Address {
      */
     private Date updateTime;
 
+    private String city;
+
+    public String getCity() {
+        return this.getCityName().replace("-", "");
+    }
+
     /**
      * 唯一标识
      * @return address_id 唯一标识
