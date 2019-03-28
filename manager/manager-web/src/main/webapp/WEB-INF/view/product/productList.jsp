@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.bl.constants.Constant" %>
 <table class="easyui-datagrid"  style="width:1000px;height:650px" id="productList" title="商品列表"
        data-options="singleSelect:false,collapsible:true,pagination:true,url:'/productController/getProductList.do',
                     method:'get',pageSize:20,toolbar:toolbar,fitColumns:true">
@@ -80,7 +81,7 @@
                     });
                     //加载主图
                     if(data.productFilePath){
-                        $("#Img").attr("src","https://www.jfegf.com/baseFileHome"+data.productFilePath);
+                        $("#Img").attr("src","<%=Constant.IMAGE_URL%>"+data.productFilePath);
                         $("#previewPictureId").show();
                     }
                     //删除主图必填限制
@@ -140,7 +141,7 @@
                 });
                 //加载主图
                 if(obj.productFilePath){
-                    $("#Img").attr("src","https://www.jfegf.com/baseFileHome"+obj.productFilePath);
+                    $("#Img").attr("src","<%=Constant.IMAGE_URL%>"+obj.productFilePath);
                     $("#previewPictureId").show();
                 }
             }
