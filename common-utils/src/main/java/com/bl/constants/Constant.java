@@ -33,5 +33,12 @@ public class Constant {
     /**
      * 静态路径
      */
-    public static final String YJF_HOME = "D:/workspace/yjfhome";
+    public static final String YJF_HOME = "D:/workspace/yjfhome";//远程阿里
+
+    /**
+     * 图片映射路径
+     */
+    public static final String IMAGE_URL = "https://www.jfegf.com/baseFileHome";
+    //public static final String IMAGE_URL = "http://image.jfy.com";
+
 }
