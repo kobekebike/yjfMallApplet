@@ -84,6 +84,19 @@ public class MallOrderWXVo {
      */
     private String selected;
 
+    /**
+     * 已售数量
+     */
+    private Integer soldOutNum;
+
+    public Integer getSoldOutNum() {
+        return soldOutNum;
+    }
+
+    public void setSoldOutNum(Integer soldOutNum) {
+        this.soldOutNum = soldOutNum;
+    }
+
     public String getSelected() {
         return selected;
     }
@@ -229,6 +242,9 @@ public class MallOrderWXVo {
                 ", productDiscount=" + productDiscount +
                 ", productFilePath='" + productFilePath + '\'' +
                 ", productCode='" + productCode + '\'' +
+                ", productId=" + productId +
+                ", selected='" + selected + '\'' +
+                ", soldOutNum=" + soldOutNum +
                 '}';
     }
 }
