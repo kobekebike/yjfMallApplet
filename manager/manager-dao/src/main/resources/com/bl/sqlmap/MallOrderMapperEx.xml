@@ -71,7 +71,7 @@
 		p.product_title,
 		p.product_file_path,
 		p.product_code,
-		p.sold_out_num
+		p.sold_out_num,
 		"true" AS selected
 		FROM mall_order mo JOIN product p ON mo.product_id=p.product_id
 		WHERE mo.user_id=#{userId}
