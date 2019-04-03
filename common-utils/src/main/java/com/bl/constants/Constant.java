@@ -6,6 +6,25 @@ package com.bl.constants;
  */
 public class Constant {
     /**
+     * 支付状态：1、已完成
+     */
+    public static final int PAY_STATE_COMPLETED = 1;
+    /**
+     * 支付状态：0、未完成
+     */
+    public static final int PAY_STATE_UNFINISHED = 0;
+
+    /**
+     * 支付方式：1、微信支付
+     */
+    public static final int PAY_METHOD_WX = 1;
+
+    /**
+     * 订单状态：
+     *      2已付款，即支付成功后的状态
+     */
+    public static final int MALL_ORDER_STATUS_MONEY_RECEIPT = 2;
+    /**
      * 订单状态：
      *      1未付款，即购物车的状态
      */
