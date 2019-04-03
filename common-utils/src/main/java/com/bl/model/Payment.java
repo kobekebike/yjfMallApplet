@@ -1,5 +1,6 @@
 package com.bl.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Payment {
@@ -16,7 +17,7 @@ public class Payment {
     /**
      * 付款金额
      */
-    private Long paymentAccount;
+    private BigDecimal paymentAccount;
 
     /**
      * 付款时间
@@ -144,7 +145,7 @@ public class Payment {
      * 付款金额
      * @return payment_account 付款金额
      */
-    public Long getPaymentAccount() {
+    public BigDecimal getPaymentAccount() {
         return paymentAccount;
     }
 
@@ -152,7 +153,7 @@ public class Payment {
      * 付款金额
      * @param paymentAccount 付款金额
      */
-    public void setPaymentAccount(Long paymentAccount) {
+    public void setPaymentAccount(BigDecimal paymentAccount) {
         this.paymentAccount = paymentAccount;
     }
 

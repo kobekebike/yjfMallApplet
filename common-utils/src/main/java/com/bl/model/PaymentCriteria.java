@@ -1,5 +1,6 @@
 package com.bl.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -100,7 +101,7 @@ public class PaymentCriteria {
     }
 
     /**
-     * payment 2019-01-25
+     * payment 2019-04-02
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -283,52 +284,52 @@ public class PaymentCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andPaymentAccountEqualTo(Long value) {
+        public Criteria andPaymentAccountEqualTo(BigDecimal value) {
             addCriterion("payment_account =", value, "paymentAccount");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentAccountNotEqualTo(Long value) {
+        public Criteria andPaymentAccountNotEqualTo(BigDecimal value) {
             addCriterion("payment_account <>", value, "paymentAccount");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentAccountGreaterThan(Long value) {
+        public Criteria andPaymentAccountGreaterThan(BigDecimal value) {
             addCriterion("payment_account >", value, "paymentAccount");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentAccountGreaterThanOrEqualTo(Long value) {
+        public Criteria andPaymentAccountGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("payment_account >=", value, "paymentAccount");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentAccountLessThan(Long value) {
+        public Criteria andPaymentAccountLessThan(BigDecimal value) {
             addCriterion("payment_account <", value, "paymentAccount");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentAccountLessThanOrEqualTo(Long value) {
+        public Criteria andPaymentAccountLessThanOrEqualTo(BigDecimal value) {
             addCriterion("payment_account <=", value, "paymentAccount");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentAccountIn(List<Long> values) {
+        public Criteria andPaymentAccountIn(List<BigDecimal> values) {
             addCriterion("payment_account in", values, "paymentAccount");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentAccountNotIn(List<Long> values) {
+        public Criteria andPaymentAccountNotIn(List<BigDecimal> values) {
             addCriterion("payment_account not in", values, "paymentAccount");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentAccountBetween(Long value1, Long value2) {
+        public Criteria andPaymentAccountBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("payment_account between", value1, value2, "paymentAccount");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentAccountNotBetween(Long value1, Long value2) {
+        public Criteria andPaymentAccountNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("payment_account not between", value1, value2, "paymentAccount");
             return (Criteria) this;
         }
@@ -1532,7 +1533,7 @@ public class PaymentCriteria {
     }
 
     /**
-     * payment 2019-01-25
+     * payment 2019-04-02
      */
     public static class Criterion {
         private String condition;
