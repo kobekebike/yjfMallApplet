@@ -23,8 +23,8 @@
 			</tr>
 	        <tr>
 	            <td class="labelTd">商品折扣:</td>
-	            <td class="inputTd"><input class="easyui-numberbox" type="text" name="productDiscount" data-options="min:1,max:99999999" style="width:80%"/>
-	            	<input type="hidden" name=""/>
+	            <td class="inputTd">
+					<input class="easyui-numberbox" type="number" name="productDiscount" data-options="min:1,max:10" style="width:80%"/>折
 	            </td>
 				<td class="labelTd">商品排序:</td>
 				<td class="inputTd">
