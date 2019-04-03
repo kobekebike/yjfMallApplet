@@ -123,4 +123,19 @@ public class MallOrderController {
                                               @RequestParam(value = "userId", defaultValue = "0") Integer userId){
         return mallOrderService.getCartMallOrderCountByUserId(userId);
     }
+
+    /**
+     * 修改订单的状态
+     *      支付完成后,修改成已收款
+     * @param req
+     * @param res
+     * @param orderId
+     * @return
+     */
+    @RequestMapping("updateOrderStatusInMoneyReceipt.do")
+    @ResponseBody
+    public Response updateOrderStatusInMoneyReceipt(HttpServletRequest req, HttpServletResponse res,
+                                                    @RequestParam String[] orderId){
+        return mallOrderService.updateOrderStatusInMoneyReceipt(orderId);
+    }
 }
