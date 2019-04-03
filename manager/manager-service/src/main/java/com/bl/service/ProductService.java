@@ -72,6 +72,10 @@ public class ProductService {
         if(productWithBLOBs.getSoldOutNum() == null){
             productWithBLOBs.setSoldOutNum(0);
         }
+        //商品折扣没有则默认为0
+        if(productWithBLOBs.getProductDiscount() == null){
+            productWithBLOBs.setProductDiscount(0);
+        }
         //商品状态:原始状态为下架(1下架,2上架)
         productWithBLOBs.setProductStatus(1);
         productWithBLOBs.setCreateId(loginBean.getUserId());

@@ -151,4 +151,27 @@ public class MallOrderService {
         }
         return Response.createSuccessResult("购物车的商品数量", count);
     }
+
+    /**
+     * 修改订单的状态
+     *      支付完成后,修改成已收款
+     * @param orderId
+     * @return
+     */
+    public Response updateOrderStatusInMoneyReceipt(String[] orderId) {
+        int count = 0;
+        MallOrder mallOrder = null;
+        for(String idStr : orderId){
+            mallOrder = new MallOrder();
+            mallOrder.setOrderId(Integer.valueOf(idStr));
+            mallOrder.setOrderStatus(Constant.MALL_ORDER_STATUS_MONEY_RECEIPT);
+            mallOrder.setUpdateTime(new Date());
+            count += mallOrderMapper.updateByPrimaryKeySelective(mallOrder);
+        }
+        if(count > 0){
+            return Response.createSuccessResult("修改成功", null);
+        }else{
+            return Response.createFailResult("修改失败", null);
+        }
+    }
 }
