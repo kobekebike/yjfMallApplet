@@ -20,6 +20,13 @@ public class LoginFilter extends OncePerRequestFilter {
 		//这里可做些日志和客户端信息统计
 		LoginBean lb = (LoginBean) arg0.getSession().getAttribute(LoginBean.UserLoginKey);
 
+		//获取url连接部分，如“/view/user.do”
+		String servletPath = arg0.getServletPath();
+		if(servletPath.contains("payResult")){
+			arg2.doFilter(arg0, arg1);
+			return;
+		}
+		//获取url参数部分
 		String queryString1 = arg0.getQueryString();
 		if (queryString1 != null && ((queryString1.contains("doLogin")) || (queryString1.contains("doWx")))) {
 			arg2.doFilter(arg0, arg1);
