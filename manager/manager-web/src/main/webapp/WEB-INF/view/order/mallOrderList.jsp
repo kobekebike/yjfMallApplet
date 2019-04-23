@@ -9,7 +9,7 @@
         	<th data-options="field:'productTitle',width:100">商品名称</th>
         	<th data-options="field:'productNum',width:60">商品数量</th>
         	<th data-options="field:'orderStatus',width:60,formatter:showOrderStatusFormatter">订单状态</th>
-        	<th data-options="field:'addressee',width:60">收件人</th>
+        	<th data-options="field:'addressee',width:60,formatter:showAddressee">收件人</th>
         	<th data-options="field:'expressCompany',width:100">快递公司</th>
         	<th data-options="field:'expressNum',width:100">快递单号</th>
         	<th data-options="field:'remark',width:100">备注</th>
@@ -79,4 +79,13 @@
         }
         return orderStatusText;
     }
+
+    function showAddressee(value, row){
+        console.log(value)
+        console.log(row)
+        if(row.orderStatus != 1){
+            return value;
+        }
+        return "";
+	}
 </script>
