@@ -4,7 +4,7 @@
     <thead>
         <tr>
         	<th data-options="field:'id',checkbox:true"></th>
-        	<th data-options="field:'wechat',width:60">微信昵称</th>
+        	<th data-options="field:'wechat',width:150">微信昵称</th>
             <th data-options="field:'createTime',width:150,formatter:dateTimeFormatter">创建时间</th>
             <th data-options="field:'updateTime',width:150,formatter:dateTimeFormatter">修改时间</th>
         </tr>
