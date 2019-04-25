@@ -58,4 +58,17 @@ public class UserInfoService {
             return Response.createFailResult("openId为空", null);
         }
     }
+
+    /**
+     * 根据标识修改用户信息
+     * @param userInfo
+     * @return
+     */
+    public Response updateUserInfo(UserInfo userInfo) {
+        if(userInfoMapper.updateByPrimaryKeySelective(userInfo) == 1){
+            return Response.createSuccessResult("保存成功", null);
+        }else{
+            return Response.createFailResult("保存失败", null);
+        }
+    }
 }
