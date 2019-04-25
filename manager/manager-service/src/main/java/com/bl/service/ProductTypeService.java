@@ -29,7 +29,7 @@ public class ProductTypeService {
         ProductTypeCriteria productTypeCriteria = new ProductTypeCriteria();
         productTypeCriteria.setLimitStart((page - 1) * rows);
         productTypeCriteria.setLimitEnd(rows);
-        productTypeCriteria.setOrderByClause("update_time desc");
+        productTypeCriteria.setOrderByClause("sort");
         List<ProductType> list = productTypeMapper.selectByExample(productTypeCriteria);
         return new EasyUIResult(list.size(), list);
     }
