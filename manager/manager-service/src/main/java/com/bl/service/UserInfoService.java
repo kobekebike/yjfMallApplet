@@ -65,6 +65,7 @@ public class UserInfoService {
      * @return
      */
     public Response updateUserInfo(UserInfo userInfo) {
+        userInfo.setUpdateTime(new Date());
         if(userInfoMapper.updateByPrimaryKeySelective(userInfo) == 1){
             return Response.createSuccessResult("保存成功", null);
         }else{
