@@ -83,4 +83,16 @@
 		</if>
 		ORDER BY mo.create_time
 	</select>
+
+	<update id="updateProductSoldOutNum">
+		UPDATE product SET sold_out_num = sold_out_num+1 WHERE product_id IN
+		(SELECT product_id FROM mall_order WHERE 1=1
+		<if test="list !=null">
+			AND order_id IN
+			<foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+        )
+	</update>
 </mapper>

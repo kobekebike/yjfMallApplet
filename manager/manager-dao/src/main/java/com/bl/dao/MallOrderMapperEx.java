@@ -22,4 +22,10 @@ public interface MallOrderMapperEx {
             @Param(value = "userId") Integer userId,
             @Param(value = "orderStatusList") String[] orderStatusArr
     );
+
+    /**
+     * 批量修改商品的已售数量
+     * @param list
+     */
+    void updateProductSoldOutNum(@Param(value = "list") String[] list);
 }

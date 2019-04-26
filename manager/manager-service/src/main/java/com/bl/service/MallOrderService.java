@@ -168,6 +168,12 @@ public class MallOrderService {
             mallOrder.setUpdateTime(new Date());
             count += mallOrderMapper.updateByPrimaryKeySelective(mallOrder);
         }
+        try {
+            //批量修改商品的已售数量
+            mallOrderMapperEx.updateProductSoldOutNum(orderId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         if(count > 0){
             return Response.createSuccessResult("修改成功", null);
         }else{
