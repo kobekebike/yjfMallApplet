@@ -17,7 +17,7 @@
         <spring.version>4.3.10.RELEASE</spring.version>
         <mybatis.version>3.0.6</mybatis.version>
         <mybatis-spring.version>1.0.2</mybatis-spring.version>
-        <jackson.version>2.6.7</jackson.version>
+        <jackson.version>2.9.10.8</jackson.version>
         <jackson-mapper.version>1.9.13</jackson-mapper.version>
         <logback.version>1.2.3</logback.version>
         <fastjson.version>1.2.7</fastjson.version>
