@@ -20,7 +20,7 @@
         <jackson.version>2.6.7</jackson.version>
         <jackson-mapper.version>1.9.13</jackson-mapper.version>
         <logback.version>1.2.3</logback.version>
-        <fastjson.version>1.2.7</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <commonsPool2.version>2.0</commonsPool2.version>
         <dbcp2.version>2.1.1</dbcp2.version>
         <commonsPool.version>1.6</commonsPool.version>
